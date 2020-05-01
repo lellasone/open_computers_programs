@@ -17,9 +17,12 @@ end
 ]]--
 find_item_self(item)
   for i = 1, inventory.getInventorySize(sides.back)
-    print(inventory.getStackInSlot(side.back, i)
+    temp = inventory.getStackInSlot(side.back, i) --lets see what we have found.
+    if(temp.name == item)
+      print("found")
+    end
   end
 end
 
-
 print(inventory.getInventorySize(sides.back))
+find_item_self("minecraft:dirt")
