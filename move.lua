@@ -15,7 +15,7 @@ local h = s.front --heading relative to start
   left and then update the h value appropriatly. It shold be used in place of 
   turnLeft(). 
 ]]--
-function tracked_left(dir)
+function tracked_left()
   r.turnLeft()
   if h = s.left then
     h = s.back
@@ -86,3 +86,17 @@ end
 function error(msg)
   print(msg)
 end
+
+function print_loc()
+  print(x)
+  print(y)
+  print(z)
+  print(h)
+end
+
+print_loc()
+tracked_move()
+tracked_move()
+tracked_right()
+tracked_move()
+print_loc()
