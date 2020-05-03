@@ -16,8 +16,8 @@ local h = s.front --heading relative to start
   turnLeft(). 
 ]]--
 function tracked_left()
-  r.turnLeft()
-  if h = s.left then
+  r.turnLeft() 
+  if h == s.left then
     h = s.back
   elseif h == s.right then
     h = s.front
@@ -39,7 +39,7 @@ end
 ]]--
 function tracked_right()
   r.turnRight()
-  if h = s.left then
+  if h == s.left then
     h = s.front
   elseif h == s.right then
     h = s.back
@@ -61,8 +61,8 @@ end
   cases. 
 ]]--
 function tracked_move()
-  if (r.forward())
-    if h = s.front then
+  if (r.forward()) then
+    if h == s.front then
       z = z + 1
     elseif h = s.back then
       z = z - 1
@@ -82,7 +82,7 @@ end
 --[[
   This function is used for reporting errors as the occur. 
   for now it is a place holder which prints the error. 
-  ]]--
+]]--
 function error(msg)
   print(msg)
 end

@@ -3,7 +3,7 @@ local component = require("component")
 local sides = require("sides")
 local inventory = component.inventory_controller
 local r = require("robot")
-
+local g = require("generator")
 
 --[[
   A dead simple function that says hello
@@ -47,6 +47,11 @@ function find_item_self(item)
   end
   return(0) -- we did not find the object.
 end
+
+function add_coal()
+  if count() < 64 then
+    if set_item_self("minecraft:coal") then
+      g.insert(
 
 print(inventory.getInventorySize(sides.front))
 find_item_self("minecraft:dirt")
