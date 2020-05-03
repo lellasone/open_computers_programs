@@ -20,11 +20,11 @@ end
 --]]
 function set_item_self(item)
   local temp = find_item_self(item)
-  if temp ~= 0 then 
+  if temp then 
     r.select(temp)
-    return(0)
+    return(temp)
   else 
-    return(0)
+    return(nil)
   end
 end
 
@@ -45,13 +45,31 @@ function find_item_self(item)
       return(i)
     end
   end
-  return(0) -- we did not find the object.
+  return(nil) -- we did not find the object.
 end
 
+
+--[[
+  This function tops up the generator with coal. It is safe to call if the
+  generator is already full, and should be called often as a result. 
+  
+  Note: This is not designed to work in a mixed-fuel environment. Only coal 
+  will be added. 
+
+  returns: true if generator full or filled, false if no coal is found.
+]]--
 function add_coal()
   if count() < 64 then
     if set_item_self("minecraft:coal") then
-      g.insert(
+      g.insert(64) --add fuel to the generator
+      return('true')
+    else
+      error("no coal found")
+      return(false)
+    end
+  end
+  return(true) --generator already full
 
 print(inventory.getInventorySize(sides.front))
 find_item_self("minecraft:dirt")
+print(add_coal)
