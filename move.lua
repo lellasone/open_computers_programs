@@ -9,6 +9,23 @@ local y = 0 --vertical position relative to reference
 local z = 0 --z position relative to referene
 local h = s.front --heading relative to start
 
+--[[
+  This function will attempt to break the block in front of it and then move into 
+  that space. This function will continue to attempt to break blocks and move for 
+  as long as its block breaks are succesful. If it is unable to break the block it
+  will give up. This is a tracked movement. 
+  returns: true if move succesful, false if can't break. 
+--]]
+function break_move()
+  if r.forward() == true then
+    return(true)
+  else if
+    if(r.swing()) then
+      break_move() --hitting it worked, so lets keep trying.
+    end
+    return(false) --seems there's no point in hitting it more, lets give up. 
+  end
+end
 
 --[[
   This function is the tracked equivilent of turnLeft(). It will turn the robot 
@@ -64,11 +81,11 @@ function tracked_move()
   if (r.forward()) then
     if h == s.front then
       z = z + 1
-    elseif h = s.back then
+    elseif h == s.back then
       z = z - 1
-    elseif h = s.left then
+    elseif h == s.left then
       x = x + 1
-    elseif h = s.right then 
+    elseif h == s.right then 
       x = x - 1 
     else
       error("invalid h")
