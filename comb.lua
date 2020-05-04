@@ -213,3 +213,5 @@ end
 
 print(add_coal())
 
+place_line_below("minecraft:stone",5)
+print_loc()
