@@ -1,10 +1,9 @@
-local component = require("component")
 local c = require("component")
 local r = require("robot")
 local s = require("sides")
 local r = require("robot")
-local g = component.generator
-local inventory = component.inventory_controller
+local g = c.generator
+local inventory = c.inventory_controller
 
 
 
@@ -15,7 +14,54 @@ local y = 0 --vertical position relative to reference
 local z = 0 --z position relative to referene
 local h = s.front --heading relative to start
 
+--[[
+  This function places a rectangular plate of material below the robot. The 
+  plate is placed in the x+ z+ directions (left and forward) starting from 
+  the block diretly below the robot. 
+]]--
+function place_rect_below(zcord, xcord, item)
+  local x_plate = 0 -- robot position in the coordinate system of the plate. 
+  local z_plate = 0 -- robot position in the coordinate system of the plate. 
 
+  -- we only build in one configuration, so lets turn the turtle to match the
+  -- starting corner of the plate. This feature is only kind of supported. 
+  if zcord > 0 and xcord < 0 then
+    tracked_right()
+  elseif zcord < 0 and xcord > 0 then
+    tracked_left()
+  elseif zcord < 0 and xcord < 0 then
+    tracked_left()
+    tracked_left()
+  end
+
+
+  while z_plate ~=zcord do
+    tracked_move() -- go to the next z cord. 
+    if x_plate == xcord and xcord > 0 then
+      tracked_left()
+      x_plate = x_plate - xcord
+    elseif x_plate == 0 then
+      tracked_right()
+      x_plate = x_plate + xcord
+    else
+      error("invalid platform coordinates")
+    end
+
+
+    plate_line_below(xcord) -- build to the other side of the plate. 
+
+
+    -- turn back in the z direction. 
+    if x_plate == 0 and xcord > 0 then
+      tracked_left()
+    elseif x_plate == xcord and xord > 0 then
+      tracked_right()
+    else 
+      error("invalid platform coordinates")
+    end
+  end
+
+end
 
 --[[
   This function will place a line of blocks below the robot. It will automatically
@@ -46,7 +92,7 @@ end
   returns: true if move succesful, false if can't break. 
 --]]
 function break_move()
-  if r.forward() == true then
+  if tracked_move() == true then
     return(true)
   else
     if(r.swing()) then
@@ -174,7 +220,7 @@ end
 ]]--
 function find_item_self(item)
   for i = 1, r.inventorySize() do
-    temp = inventory.getStackInIntenralSlot(i) --lets see what we have found.
+    local temp = inventory.getStackInInternalSlot(i) --lets see what we have found.
     if(temp ~= nil and temp.name == item) then
       print("found")
       return(i)
@@ -213,5 +259,5 @@ end
 
 print(add_coal())
 
-place_line_below("minecraft:stone",5)
+place_line_below(5,"minecraft:stone")
 print_loc()
