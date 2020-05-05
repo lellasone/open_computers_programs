@@ -84,10 +84,10 @@ end
     length - distance to place blocks. 
 --]]
 function place_line_below(length, item)
-  local loc = 0
+  local loc = 1
   set_item_self(item)
   r.placeDown()
-  while loc <= length do
+  while loc < length do
     break_move()
     set_item_self(item) -- go to a stack of our blocks. 
     r.placeDown()
