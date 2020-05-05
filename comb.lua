@@ -88,9 +88,10 @@ function place_line_below(length, item)
   set_item_self(item)
   r.placeDown()
   while loc <= length do
+    break_move()
     set_item_self(item) -- go to a stack of our blocks. 
     r.placeDown()
-    break_move()
+
     loc = loc + 1
   end
 
@@ -272,5 +273,6 @@ end
 
 print(add_coal())
 
+place_line_below(1,"mineacraft:stone")
 place_rect_below(2,2,"minecraft:stone")
 print_loc()
