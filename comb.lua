@@ -87,7 +87,7 @@ function place_line_below(length, item)
   local loc = 1
   set_item_self(item)
   r.placeDown()
-  while loc < length do
+  while loc <= length do
     set_item_self(item) -- go to a stack of our blocks. 
     r.placeDown()
     break_move()
