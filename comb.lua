@@ -267,5 +267,5 @@ end
 
 print(add_coal())
 
-place_line_below(5,"minecraft:stone")
+place_line_below(2,2,"minecraft:stone")
 print_loc()
