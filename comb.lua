@@ -36,7 +36,7 @@ function place_rect_below(zcord, xcord, item)
 
 
   while z_plate ~=zcord do
-    tracked_move() -- go to the next z cord. 
+    break_move() -- go to the next z cord. 
     if x_plate == xcord and xcord > 0 then
       tracked_left()
       x_plate = x_plate - xcord
@@ -48,13 +48,13 @@ function place_rect_below(zcord, xcord, item)
     end
 
 
-    plate_line_below(xcord) -- build to the other side of the plate. 
+    place_line_below(xcord, item) -- build to the other side of the plate. 
 
 
     -- turn back in the z direction. 
     if x_plate == 0 and xcord > 0 then
       tracked_left()
-    elseif x_plate == xcord and xord > 0 then
+    elseif x_plate == xcord and xcord > 0 then
       tracked_right()
     else 
       error("invalid platform coordinates")
@@ -77,7 +77,7 @@ function place_line_below(length, item)
   local loc = 0
   for i = 0, length, 1 do
     set_item_self(item) -- go to a stack of our blocks. 
-    r.place(s.down)
+    r.placeDown()
     break_move()
   end
 
