@@ -42,14 +42,16 @@ function place_rect_below(zcord, xcord, item)
   tracked_left()
   place_line_below(xcord, item)
   x_plate = xcord
+  tracked_right()
 
   while z_plate ~=zcord do
+    z_plate = z_plate + 1
     break_move() -- go to the next z cord. 
     if x_plate == xcord then
-      tracked_left()
+      tracked_right()
       x_plate = x_plate - xcord
     elseif x_plate == 0 then
-      tracked_right()
+      tracked_left()
       x_plate = x_plate + xcord
     else
       error("invalid platform coordinates")
@@ -267,5 +269,5 @@ end
 
 print(add_coal())
 
-place_line_below(2,2,"minecraft:stone")
+place_rect_below(2,2,"minecraft:stone")
 print_loc()
