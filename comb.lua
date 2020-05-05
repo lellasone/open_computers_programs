@@ -44,9 +44,9 @@ function place_rect_below(zcord, xcord, item)
   x_plate = xcord
   tracked_right()
 
-  while z_plate ~=zcord do
+  while z_plate < zcord - 1 do
     z_plate = z_plate + 1
-    break_move() -- go to the next z cord. 
+    place_line_below(1, item) -- go to the next z cord. 
     if x_plate == xcord then
       tracked_right()
       x_plate = x_plate - xcord
@@ -84,11 +84,14 @@ end
     length - distance to place blocks. 
 --]]
 function place_line_below(length, item)
-  local loc = 0
-  for i = 0, length, 1 do
+  local loc = 1
+  set_item_self(item)
+  r.placeDown()
+  while loc < length do
     set_item_self(item) -- go to a stack of our blocks. 
     r.placeDown()
     break_move()
+    loc = loc + 1
   end
 
 end
