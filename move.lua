@@ -19,7 +19,7 @@ local h = s.front --heading relative to start
 function break_move()
   if r.forward() == true then
     return(true)
-  else if
+  else
     if(r.swing()) then
       break_move() --hitting it worked, so lets keep trying.
     end

@@ -27,17 +27,25 @@ function place_rect_below(zcord, xcord, item)
   -- starting corner of the plate. This feature is only kind of supported. 
   if zcord > 0 and xcord < 0 then
     tracked_right()
+    xcord = -1* xcord
   elseif zcord < 0 and xcord > 0 then
     tracked_left()
+    zcord = -1*zcord
   elseif zcord < 0 and xcord < 0 then
     tracked_left()
     tracked_left()
+    zcord = -1*zcord
+    xcord = -1*xcord
   end
 
+  -- place the first line. 
+  tracked_left()
+  place_line_below(xcord, item)
+  x_plate = xcord
 
   while z_plate ~=zcord do
     break_move() -- go to the next z cord. 
-    if x_plate == xcord and xcord > 0 then
+    if x_plate == xcord then
       tracked_left()
       x_plate = x_plate - xcord
     elseif x_plate == 0 then
