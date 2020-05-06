@@ -28,10 +28,8 @@ local RAIL_ACTIVATOR = "minecraft:redstone_block"
     length - int, how long the track should be in blocks. 
 --]]
 function place_rail_line(length)
-  place_powered(RAIL_POWERED)
-  length = length - RAIL_POWERED
   while length > 0 do
-    place_powered(RAIL_POWERED)
+    place_powered(RAIL_POWERED, RAIL_ACTIVATOR)
     length = length - RAIL_POWERED
     
     if length > RAIL_UNPOWERED then
