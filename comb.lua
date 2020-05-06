@@ -14,10 +14,66 @@ local y = 0 --vertical position relative to reference
 local z = 0 --z position relative to referene
 local h = s.front --heading relative to start
 
+local RAIL_UNPOWERED = 4 -- how long should the stretches of unpowered rail be.
+local RAIL_POWERED = 1 -- how long should the stretches of powered rail be. 
+local RAIL_ACTIVATOR = "minecraft:redstone_block"
+--[[
+  This function places a long distance rail line composed of mixed powered and
+  unpowered track. The track will always start with a standard sized length of
+  powered track. The end of the line may be powered or unpowered depending on 
+  where it falls. The rail is placed directly below the robot (meaning it must
+  start one block above the surface where the rail is to be placed). 
+  This function uses tracked movement. 
+  args:
+    length - int, how long the track should be in blocks. 
+--]]
+function place_rail_line(length)
+  place_powered(RAIL_POWERED)
+  length = length - RAIL_POWERED
+  while length > 0 do
+    place_powered(RAIL_POWERED)
+    length = length - RAIL_POWERED
+    
+    if length > RAIL_UNPOWERED then
+      -- not near end of track, place another strech of unpowered rail. 
+      place_line_below(RAIL_UNPOWERED, "minecraft:rail")
+      length = length - RAIL_UNPOWERED
+    else
+      -- remaining distance less than unpowered strech, place regular till we get
+      -- to the end of the track. 
+      place_line_below(length, "minecraft:rail")
+      length = 0
+    end
+  end
+end
+
+--[[
+  This function places a stretch of powered golden rail starting directly below
+  the robot. An actiator plock as specified is placed to the right of the first
+  golden rail. 
+  This function uses tracked movement.
+  args:
+    length - int, how long of a strech to place. 
+    activator - minecraft block name, the block to place to power the rail
+--]]
+function place_powered(length, activator)
+  tracked_right()
+  break_move()
+  set_item_self(activator)
+  r.placeDown()
+  tracked_left()
+  tracked_left()
+  break_move()
+  tracked_right()
+  place_line_below(length, "minecraft:golden_rail")
+end
+
+
 --[[
   This function places a rectangular plate of material below the robot. The 
   plate is placed in the x+ z+ directions (left and forward) starting from 
   the block diretly below the robot. 
+  this funciton uses tracked movement. 
 ]]--
 function place_rect_below(zcord, xcord, item)
   local x_plate = 0 -- robot position in the coordinate system of the plate. 
@@ -46,7 +102,7 @@ function place_rect_below(zcord, xcord, item)
 
   while z_plate < zcord - 1 do
     z_plate = z_plate + 1
-    place_line_below(1, item) -- go to the next z cord. 
+    place_line_below(2, item) -- go to the next z cord. 
     if x_plate == xcord then
       tracked_right()
       x_plate = x_plate - xcord
