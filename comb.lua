@@ -329,6 +329,5 @@ end
 
 print(add_coal())
 
-place_line_below(1,"mineacraft:stone")
-place_rect_below(2,2,"minecraft:stone")
+place_rail_line(5)
 print_loc()
