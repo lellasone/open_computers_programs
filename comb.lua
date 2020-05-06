@@ -29,6 +29,7 @@ local RAIL_ACTIVATOR = "minecraft:redstone_block"
 --]]
 function place_rail_line(length)
   while length > 0 do
+    break_move()
     place_powered(RAIL_POWERED, RAIL_ACTIVATOR)
     length = length - RAIL_POWERED
     
