@@ -327,5 +327,4 @@ end
 
 print(add_coal())
 
-place_rail_line(5)
-print_loc()
+place_rail_line(3)
