@@ -329,6 +329,15 @@ function hello_world()
 end
 
 
+--[[
+  This function outputs the inventory to the console for debugging purposes. 
+--]]
+function print_inventory()
+  for i = 1,  i <= r.inventorySize(), i = i + 1 do
+    print(inventory.getStackInInternalSlot(i))
+  end
+end
+
 --[[ 
   Locates the specified item in inentory and selects that slot.
   if the slot cannot be found then no change is made. 
