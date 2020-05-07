@@ -190,7 +190,7 @@ end
   to be in the way. It uses tracked movement. 
  ]]--
  function break_line(length)
-   for i = 0, i < length, i = i+1 do
+   for i = 0, i < length, + 1 do
      break_move()
    end
  end
@@ -333,7 +333,7 @@ end
   This function outputs the inventory to the console for debugging purposes. 
 --]]
 function print_inventory()
-  for i = 1,  i <= r.inventorySize(), i = i + 1 do
+  for i = 1,  i <= r.inventorySize(), + 1 do
     print(inventory.getStackInInternalSlot(i))
   end
 end
