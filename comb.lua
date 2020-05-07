@@ -402,5 +402,5 @@ function add_coal()
 end
 
 print(add_coal())
-
-place_rail_line(3)
+print_inventory()
+place_rail_line(10)
