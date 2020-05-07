@@ -20,12 +20,35 @@ local RAIL_ACTIVATOR = "minecraft:redstone_block"
 
 
 --[[
-
-
+  This function places the markers and quarry for the right quarry.
+  This function uses tracked movement. 
+  Precondition: Robot placed in the block where the quarry should be. 
+  		line of blocks placed out to forward landmark location. 
+  postcondition: Quarry placed and activated. 
 ]]--
 function place_right_quarry()
-  place_line_below(64, "minecraft:stone")
-
+  place_line_below(65, "minecraft:stone")
+  tracked_up()
+  set_item_self("buildcraft:landmark")
+  r.placeDown()   --Place outer landmark. 
+  tracked_left()
+  tracked_left()
+  break_line(64)  --return to start (but up by one)
+  tracked_right()
+  break_line(64)
+  r.placeDown()   --place forward marker. 
+  tracked_right()
+  tracked_right()
+  break_line(64)
+  r.placeDown(64) --place center marker. 
+  r.use() --activate markers. 
+  tracked_right()
+  break_move()
+  tracked_right()
+  tracked_right()
+  set_item_self("buildcraft:quarry")
+  r.placeDown()
+end
 
 --[[
   This function places a long distance rail line composed of mixed powered and
@@ -162,6 +185,15 @@ function place_line_below(length, item)
 
 end
 
+--[[
+  This function moves the robot a specified distance, breaking any blocks that happen
+  to be in the way. It uses tracked movement. 
+ ]]--
+ function break_line(length)
+   for i = 0, i < length, i = i+1 do
+     break_move()
+   end
+ end
 
 --[[
   This function will attempt to break the block in front of it and then move into 
