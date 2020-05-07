@@ -17,6 +17,16 @@ local h = s.front --heading relative to start
 local RAIL_UNPOWERED = 4 -- how long should the stretches of unpowered rail be.
 local RAIL_POWERED = 1 -- how long should the stretches of powered rail be. 
 local RAIL_ACTIVATOR = "minecraft:redstone_block"
+
+
+--[[
+
+
+]]--
+function place_right_quarry()
+  place_line_below(64, "minecraft:stone")
+
+
 --[[
   This function places a long distance rail line composed of mixed powered and
   unpowered track. The track will always start with a standard sized length of
@@ -169,6 +179,30 @@ function break_move()
     end
     return(false) --seems there's no point in hitting it more, lets give up. 
   end
+end
+
+--[[
+  This function moves the robot up one block and updates the y value appropriatly. 
+  It should be used in place of robot.up
+--]]
+function tracked_up()
+  if(r.up()) then
+    y = y + 1
+    return(true)
+  end
+  return(nil)
+end
+
+--[[
+  This function moves the robot down one block and updates the y value appropriatly.
+  It should be used in place of robot.down
+--]]
+function tracked_down()
+  if(r.down()) then
+    y = y-1
+    return(true)
+  end
+  return(false)
 end
 
 --[[
