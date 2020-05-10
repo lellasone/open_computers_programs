@@ -29,7 +29,7 @@ local RAIL_ACTIVATOR = "minecraft:redstone_block"
 function place_right_quarry()
   place_line_below(65, "minecraft:stone")
   tracked_up()
-  set_item_self("buildcraftbuilders:marker_volume")
+  set_item_self("buildcraftcore:marker_volume")
   r.placeDown()   --Place outer landmark. 
   tracked_left()
   tracked_left()
@@ -40,7 +40,7 @@ function place_right_quarry()
   tracked_right()
   tracked_right()
   break_line(64)
-  r.placeDown(64) --place center marker. 
+  r.placeDown() --place center marker. 
   r.use() --activate markers. 
   tracked_right()
   break_move()
@@ -190,7 +190,7 @@ end
   to be in the way. It uses tracked movement. 
  ]]--
  function break_line(length)
-   for i = 0, i < length, 1 do
+   for i = 0, length, 1 do
      break_move()
    end
  end
