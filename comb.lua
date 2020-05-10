@@ -335,6 +335,7 @@ end
 function print_inventory()
   for i = 1,  i <= r.inventorySize(),  1 do
     local temp = inventory.getStackInInternalSlot(i)
+    print(i)
     if temp.name ~= nil then print(temp.name) end
   end
 end
