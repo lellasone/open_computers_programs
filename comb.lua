@@ -29,7 +29,7 @@ local RAIL_ACTIVATOR = "minecraft:redstone_block"
 function place_right_quarry()
   place_line_below(65, "minecraft:stone")
   tracked_up()
-  set_item_self("buildcraft:landmark")
+  set_item_self("buildcraftbuilders:marker_volume")
   r.placeDown()   --Place outer landmark. 
   tracked_left()
   tracked_left()
@@ -46,7 +46,7 @@ function place_right_quarry()
   break_move()
   tracked_right()
   tracked_right()
-  set_item_self("buildcraft:quarry")
+  set_item_self("buildcraftbuilders:quarry")
   r.placeDown()
 end
 
@@ -335,7 +335,6 @@ end
 function print_inventory()
   for i = 1, r.inventorySize(),  1 do
     local temp = inventory.getStackInInternalSlot(i)
-    print(i)
     if temp.name ~= nil then print(temp.name) end
   end
 end
@@ -404,5 +403,6 @@ function add_coal()
 end
 
 print(add_coal())
+place_right_quarry()
 print_inventory()
 place_rail_line(10)
