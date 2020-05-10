@@ -333,7 +333,7 @@ end
   This function outputs the inventory to the console for debugging purposes. 
 --]]
 function print_inventory()
-  for i = 1,  i <= r.inventorySize(),  1 do
+  for i = 1, r.inventorySize(),  1 do
     local temp = inventory.getStackInInternalSlot(i)
     print(i)
     if temp.name ~= nil then print(temp.name) end
