@@ -335,7 +335,7 @@ end
 function print_inventory()
   for i = 1, r.inventorySize(),  1 do
     local temp = inventory.getStackInInternalSlot(i)
-    if temp.name ~= nil then print(temp.name) end
+    if temp ~= nil then print(temp.name) end
   end
 end
 
@@ -403,6 +403,6 @@ function add_coal()
 end
 
 print(add_coal())
-place_right_quarry()
 print_inventory()
+place_right_quarry()
 place_rail_line(10)
