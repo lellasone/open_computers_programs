@@ -136,9 +136,38 @@ function tracked_move()
   
 end
 
-function mine_line(length)
 
+--[[ This function column-mines for the specified number of blocks in a straght
+    line. The robot will mine a column every other block along the line and 
+    will dump it's materials and refuel after every column. 
+    Precondition: Robot above column to mine. An ender chest should be in the
+                  inventory containing coal, and the ender chest should remove
+                  depositied materials. 
+    args: 
+        length - how far should the robot travel while mining. Total mined
+                 length will be two greater than this (because the robot mines
+                 the adjacent columns each time it decends)
+]]--
+function mine_line(length)
+    for a = 0, length, 1 do
+        mine_column()
+        dump_goods()
+        fuel_robot()
+        break_line(2)
+    end 
     print(length)
+end
+
+function mine_column()
+
+end
+
+function dump_goods()
+
+end
+
+function fuel_robot()
+
 end
 
 function place_powered()
@@ -156,13 +185,13 @@ while i < 20 do
     tracked_right()
     if i%2 == 0 then
         break_move()
-        mine_line(15)
+        mine_line(13)
     else
-        mine_line(16)
+        mine_line(14)
     end    
     tracked_right()
     tracked_right()
-    break_line(16)
+    break_line(14)
     tracked_right()
     if i%POWERED_FREQ == 0 then
         place_powered()
