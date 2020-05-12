@@ -149,11 +149,13 @@ end
                  the adjacent columns each time it decends)
 ]]--
 function mine_line(length)
-    for a = 0, length, 2 do
-        mine_column()
-        dump_goods()
-        fuel_robot()
-        break_line(2)
+    for a = 0, length, 1 do
+        if a%2 == 1 then
+            mine_column()
+            dump_goods()
+            fuel_robot()
+        end
+        break_move()
     end 
     print(length)
 end
