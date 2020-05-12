@@ -204,6 +204,6 @@ while i < 20 do
     end 
     break_move()
     break_move()
-    os.sleep()
+    os.sleep(1)
 end
 
