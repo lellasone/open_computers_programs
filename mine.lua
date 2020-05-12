@@ -149,11 +149,11 @@ end
                  the adjacent columns each time it decends)
 ]]--
 function mine_line(length)
-    for a = 0, length, 1 do
+    for a = 0, length, 2 do
         mine_column()
         dump_goods()
         fuel_robot()
-        break_line(1)
+        break_line(2)
     end 
     print(length)
 end
@@ -178,7 +178,7 @@ function place_regular()
     print("placing regular block")
 end
 
-POWERED_FREQ = 20
+POWERED_FREQ = 5
 
 local i = 0
 while i < 20 do 
@@ -190,6 +190,7 @@ while i < 20 do
     else
         mine_line(14)
     end    
+    print("returning")
     tracked_right()
     tracked_right()
     break_line(14)
