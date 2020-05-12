@@ -153,7 +153,7 @@ function mine_line(length)
         mine_column()
         dump_goods()
         fuel_robot()
-        break_line(2)
+        break_line(1)
     end 
     print(length)
 end
