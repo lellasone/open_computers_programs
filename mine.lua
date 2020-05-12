@@ -186,14 +186,14 @@ while i < 20 do
     tracked_right()
     if i%2 == 0 then
         break_move()
-        mine_line(13)
+        mine_line(5)
     else
-        mine_line(14)
+        mine_line(6)
     end    
     print("returning")
     tracked_right()
     tracked_right()
-    break_line(14)
+    break_line(6)
     tracked_right()
     if i%POWERED_FREQ == 0 then
         place_powered()
