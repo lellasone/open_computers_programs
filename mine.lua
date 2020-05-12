@@ -183,6 +183,7 @@ POWERED_FREQ = 5
 local i = 0
 while i < 20 do 
     i = i + 1
+    print(i)
     tracked_right()
     if i%2 == 0 then
         break_move()
@@ -203,5 +204,6 @@ while i < 20 do
     end 
     break_move()
     break_move()
+    os.sleep()
 end
 
