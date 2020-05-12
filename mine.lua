@@ -182,6 +182,7 @@ POWERED_FREQ = 20
 
 local i = 0
 while i < 20 do 
+    i = i + 1
     tracked_right()
     if i%2 == 0 then
         break_move()
@@ -199,6 +200,7 @@ while i < 20 do
     else
         place_regular()
     end 
+    break_move()
     break_move()
 end
 
