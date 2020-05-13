@@ -87,7 +87,7 @@ function get_item_other(side, item, quantity, timeout)
         if quantity <= 0 then
             return(true) -- we got all our items, end the loop.
         end
-        os.delay(0.25) -- wait before next search 
+        os.sleep(0.25) -- wait before next search 
     end
     return(false) -- we didn't get everything we wanted before timeout. 
 end  
