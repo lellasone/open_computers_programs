@@ -165,6 +165,23 @@ function break_move()
 end
 
 --[[
+  This function will attempt to break the block above it and then move into 
+  that space. This function will continue to attempt to break blocks and move for 
+  as long as its block breaks are succesful. If it is unable to break the block it
+  will give up. This is a tracked movement. 
+  returns: true if move succesful, false if can't break. 
+--]]
+function break_up()
+  if tracked_up() == true then
+    return(true)
+  else
+    if(r.swingUP()) then
+      break_up() --hitting it worked, so lets keep trying.
+    end
+    return(false) --seems there's no point in hitting it more, lets give up. 
+  end
+end
+--[[
   This function moves the robot up one block and updates the y value appropriatly. 
   It should be used in place of robot.up
 --]]
@@ -301,6 +318,7 @@ function grab_supplies()
 end
 
 function mine_column(timeout)
+    local z_start = z 
     for i = 0, timeout, 1 do
    	tracked_down()
 	-- mine to all sides. 
@@ -311,6 +329,11 @@ function mine_column(timeout)
 	-- lets place our scaffold. 
 	set_item_self(SCAFFOLD_MATERIAL)
 	r.place(s.back)
+    end
+    while z < z_start do
+        set_item_self(SCAFFOLD_MATERIAL)
+        r.place(s.back())
+        break_up() 
     end
 end
 
