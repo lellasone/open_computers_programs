@@ -357,7 +357,7 @@ function mine_column(timeout)
 	end
 	-- lets place our scaffold. 
 	set_item_self(SCAFFOLD_MATERIAL)
-	r.place(s.back)
+	r.place()
     end
     while z < z_start do
         set_item_self(SCAFFOLD_MATERIAL)
