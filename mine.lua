@@ -140,6 +140,30 @@ function add_coal()
   return(true) --generator already full
 end
 
+--[[
+  This function will place a line of blocks below the robot. It will automatically
+  switch from one stack to another as needed, but does not check that enough blocks
+  are in inventory before starting. Stacks will be used from low to high according
+  to slot location. The robot will not return to it's starting position after
+  it is done placing blocks. 
+  args: 
+    item - type of block to place, for example "minecraft:dirt"
+    length - distance to place blocks. 
+--]]
+function place_line_below(length, item)
+  local loc = 1
+  set_item_self(item)
+  r.placeDown()
+  while loc < length do
+    break_move()
+    set_item_self(item) -- go to a stack of our blocks. 
+    r.placeDown()
+
+    loc = loc + 1
+  end
+
+end
+
 
 --[[
   This function moves the robot a specified distance, breaking any blocks that happen
