@@ -6,6 +6,11 @@ local g = c.generator
 local inventory = c.inventory_controller
 
 
+POWERED_FREQ = 5
+SWATH_WIDTH  = 14 -- width to travel (mined width will be two greater)
+SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
+-- List of items to not mine on the sides. These will still be broken if in the way of robot movement. 
+NO_MINE_LIST = {"minecraft:stone", SCAFFOLD_MATERIAL, "minecraft:dirt", "minecraft:glass"}
 
 
 -- by default the robot's "forward" is along z+ to start.
@@ -368,11 +373,6 @@ function fuel_robot()
 end
 
 
-POWERED_FREQ = 5
-SWATH_WIDTH  = 14 -- width to travel (mined width will be two greater)
-SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
--- List of items to not mine on the sides. These will still be broken if in the way of robot movement. 
-NO_MINE_LIST = {"minecraft:stone", SCAFFOLD_MATERIAL, "minecraft:dirt", "minecraft:glass"}
 print_inventory() 
 local i = 0
 while i < 40 do 
