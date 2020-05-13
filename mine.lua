@@ -71,7 +71,7 @@ end
         timeout - int, seconds to wait before giving up (default 100). 
     returns: true if all items collected, false if timeout trips first.
 ]]-- 
-function get_item_other(item, side, quantity, timeout)
+function get_item_other(side, item, quantity, timeout)
     timeout = timeout or 100 --set the default number of tries. 
     
     for i = 0, timeout * 4, 1 do
