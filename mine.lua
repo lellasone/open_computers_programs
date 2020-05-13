@@ -278,7 +278,7 @@ function mine_line(length)
             grab_supplies()
             fuel_robot()
         end
-        place_line_below(1, "minecraft:cobblestone")
+        place_line_below(1, SCAFFOLD_MATERIAL)
     end 
     print(length)
 end
@@ -291,7 +291,7 @@ function grab_supplies()
     print("getting items")
     print(find_item_other(s.bottom, "minecraft:coal"))
     get_item_other(s.bottom, "minecraft:coal", 64)
-    get_item_other(s.botton, "minecraft:cobblestone", 128)
+    get_item_other(s.botton, SCAFFOLD_MATERIAL, 128)
     get_item_other(s.bottom, "minecraft:diamond_pickaxe",1)
     get_item_other(s.bottom, "minecraft:redstone_block",32)
     get_item_other(s.bottom, "minecraft:golden_rail", 32)
@@ -300,7 +300,22 @@ function grab_supplies()
     r.swingDown()
 end
 
-function mine_column()
+function mine_column(timeout)
+    for i = 0, timeout, 1 do
+   	tracked_down()
+	-- mine to all sides. 
+	for i = 0, 4, 1 do
+	    tracked_right()
+	    break_black(NO_MINE_LIST)
+	end
+	-- lets place our scaffold. 
+	set_item_self(SCAFFOLD_MATERIAL)
+	r.place(s.back)
+    end
+end
+
+function break_black(blacklist)
+    print(blacklist) 
 
 end
 
@@ -321,20 +336,20 @@ function dump_goods()
     r.swingDown()
 end
 
+--[[
+    This function adds new fuel to the robot. Right now it just wraps add_coal
+    so the robot needs to already have fuel in it's inventory. 
+]]--
 function fuel_robot()
-
+    add_coal()
 end
 
-function place_powered()
-    print("placing powered block")
-
-end
-function place_regular()
-    print("placing regular block")
-end
 
 POWERED_FREQ = 5
 SWATH_WIDTH  = 14 -- width to travel (mined width will be two greater)
+SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
+-- List of items to not mine on the sides. These will still be broken if in the way of robot movement. 
+NO_MINE_LIST = {"minecraft:stone", SCAFFOLD_MATERIAL, "minecraft:dirt", "minecraft:glass"}
 print_inventory() 
 local i = 0
 while i < 40 do 
@@ -342,7 +357,7 @@ while i < 40 do
     print(i)
     tracked_right()
     if i%2 == 0 then
-        place_line_below(1,"minecraft:cobblestone")
+        place_line_below(1,SCAFFOLD_MATERIAL)
         mine_line(SWATH_WIDTH - 1)
     else
         mine_line(SWATH_WIDTH)
@@ -357,16 +372,16 @@ while i < 40 do
 	place_line_below(1, "minecraft:redstone_block")
 	set_item_self("minecraft:rail")
 	r.place(s.back)
-	place_line_below(1, "minecraft:cobblestone:")
+	place_line_below(1,SCAFFOLD_MATERIAL) 
 	set_item_self("minecraft:golden_rail")
 	r.place(s.back())
         i = 0
     else
-       	place_line_below(1, "minecraft:cobblestone")
+       	place_line_below(1, SCAFFOLD_MATERIAL)
 	set_item_self("minecraft:rail")
 	r.place(s.back)
-	place_line_below(1, "minecraft:cobblestone:")
-	set_item_self("minecraft:cobblestone")
+	place_line_below(1,  SCAFFOLD_MATERIAL)
+	set_item_self(SCAFFOLD_MATERIAL)
 	r.place(s.back)
     end 
     os.sleep(1)
