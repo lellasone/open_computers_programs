@@ -234,8 +234,13 @@ function mine_line(length)
     print(length)
 end
 
-function grap_supplies()
 
+function grab_supplies()
+    r.swingDown()
+    set_item_sself("enderstorage:ender_storage")
+    r.placeDown()
+    print("getting items")
+    r.swingDown()
 end
 
 function mine_column()
@@ -245,6 +250,8 @@ end
 --[[ 
     Places an ender chest below the robot. Dumps the entire contents of the 
     robot's inventory into the ender chest. Then picks up the ender chest. 
+    pre-condition: the robot must be placed such that the block below it is
+    placeable for that robot (if no angel upgrade). 
 ]]--
 function dump_goods()
     r.swingDown()
@@ -269,7 +276,7 @@ function place_regular()
 end
 
 POWERED_FREQ = 5
-print_invenotry() 
+print_inventory() 
 local i = 0
 while i < 20 do 
     i = i + 1
