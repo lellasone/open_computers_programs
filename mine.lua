@@ -275,9 +275,10 @@ function mine_line(length)
             grab_supplies()
             mine_column()
             dump_goods()
+            grab_supplies()
             fuel_robot()
         end
-        break_move()
+        place_line_below(1, "minecraft:cobblestone")
     end 
     print(length)
 end
@@ -290,6 +291,7 @@ function grab_supplies()
     print("getting items")
     print(find_item_other(s.bottom, "minecraft:coal"))
     get_item_other(s.bottom, "minecraft:coal", 64)
+    get_item_other(s.botton, "minecraft:cobblestone", 128)
     add_coal() -- can't be too careful. 
     r.swingDown()
 end
@@ -335,7 +337,7 @@ while i < 20 do
     print(i)
     tracked_right()
     if i%2 == 0 then
-        break_move()
+        place_line_below(1,"minecraft:cobblestone")
         mine_line(5)
     else
         mine_line(6)
