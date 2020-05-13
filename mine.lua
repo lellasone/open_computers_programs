@@ -41,7 +41,56 @@ end
 
 
 
+--[[
+  Find the first instance of the specified item in an adjacent storage 
+  inventory. This function does not set a new selected slot. 
+  args:
+    item - string, name of the item to search for ("minecraft:dirt")
+    side - int, number of the side to check inventory on. 
+  returns: number of first slot containing item, nil if none found. 
+]]--
+function find_item_other(side, item)
+  for i = 1, inventory.getInventorySize(side) do
+    local temp = inventory.getStackInSlot(side, i) --lets see what we have found.
+    if(temp ~= nil and temp.name == item) then
+      return(i)
+    end
+  end
+  return(nil) -- we did not find the object.
+end
 
+--[[
+    Get the specified number of items from the specified inventory. This
+    function will pull from each slot (with the correct item) in turn until it
+    gets enough items. If the inventory is exhausted before that occurs it will
+    wait a short time and then try again. 
+    args:
+        item - string, minecraft name of item to get ("minecraft:coal")
+        side - int, number of side to pull from. 
+        quantity - int, number of items to get. 
+        timeout - int, seconds to wait before giving up (default 100). 
+    returns: true if all items collected, false if timeout trips first.
+]]-- 
+function get_item_other(item, side, quantity, timeout)
+    timeout = timeout or 100 --set the default number of tries. 
+    
+    for i = 0, timeout * 4, 1 do
+        local slot = find_item_other(side, item)
+        if (slot ~= nil) then  
+            local target = inventory.getStackInSlot(side, slot)
+            if(target ~= nil and target.name == item) then
+                local quant = item.size -- get number of items in target stack. 
+                inventory.suckFromSlot(side, slot, quantity)
+                quantity = quantity - quant
+            end
+        end
+        if quantity <= 0 then
+            return(true) -- we got all our items, end the loop.
+        end
+        os.delay(0.25) -- wait before next search 
+    end
+    return(false) -- we didn't get everything we wanted before timeout. 
+end  
 
 --[[
   Find the first instance of the specified item in this device's general 
@@ -52,7 +101,6 @@ function find_item_self(item)
   for i = 1, r.inventorySize() do
     local temp = inventory.getStackInInternalSlot(i) --lets see what we have found.
     if(temp ~= nil and temp.name == item) then
-      print("found")
       return(i)
     end
   end
@@ -237,9 +285,11 @@ end
 
 function grab_supplies()
     r.swingDown()
-    set_item_sself("enderstorage:ender_storage")
+    set_item_self("enderstorage:ender_storage")
     r.placeDown()
     print("getting items")
+    get_item_other(s.down, "minecraft:coal", 64)
+    add_fuel() -- can't be too careful. 
     r.swingDown()
 end
 
