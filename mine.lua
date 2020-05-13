@@ -290,7 +290,7 @@ function grab_supplies()
     print("getting items")
     print(find_item_other(s.bottom, "minecraft:coal"))
     get_item_other(s.bottom, "minecraft:coal", 64)
-    add_fuel() -- can't be too careful. 
+    add_coal() -- can't be too careful. 
     r.swingDown()
 end
 
@@ -309,7 +309,8 @@ function dump_goods()
     set_item_self("enderstorage:ender_storage")
     r.placeDown()
     for i = 1, r.inventorySize(),  1 do
-       r.dropDown()
+        r.select(i)
+        r.dropDown()
     end
     r.swingDown()
 end
