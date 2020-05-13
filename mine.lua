@@ -319,7 +319,7 @@ function mine_line(length)
     for a = 0, length, 1 do
         if a%2 == 1 then
             grab_supplies()
-            mine_column()
+            mine_column(128)
             dump_goods()
             grab_supplies()
             fuel_robot()
