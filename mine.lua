@@ -288,7 +288,8 @@ function grab_supplies()
     set_item_self("enderstorage:ender_storage")
     r.placeDown()
     print("getting items")
-    get_item_other(s.down, "minecraft:coal", 64)
+    print(find_item_other(s.bottom, "minecraft:coal"))
+    get_item_other(s.bottom, "minecraft:coal", 64)
     add_fuel() -- can't be too careful. 
     r.swingDown()
 end
