@@ -79,7 +79,7 @@ function get_item_other(side, item, quantity, timeout)
         if (slot ~= nil) then  
             local target = inventory.getStackInSlot(side, slot)
             if(target ~= nil and target.name == item) then
-                local quant = item.size -- get number of items in target stack. 
+                local quant = target.size -- get number of items in target stack. 
                 inventory.suckFromSlot(side, slot, quantity)
                 quantity = quantity - quant
             end
