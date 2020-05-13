@@ -292,6 +292,10 @@ function grab_supplies()
     print(find_item_other(s.bottom, "minecraft:coal"))
     get_item_other(s.bottom, "minecraft:coal", 64)
     get_item_other(s.botton, "minecraft:cobblestone", 128)
+    get_item_other(s.bottom, "minecraft:diamond_pickaxe",1)
+    get_item_other(s.bottom, "minecraft:redstone_block",32)
+    get_item_other(s.bottom, "minecraft:golden_rail", 32)
+    get_item_other(s.bottom, "minecraft:rail", 32)
     add_coal() -- can't be too careful. 
     r.swingDown()
 end
@@ -330,31 +334,41 @@ function place_regular()
 end
 
 POWERED_FREQ = 5
+SWATH_WIDTH  = 14 -- width to travel (mined width will be two greater)
 print_inventory() 
 local i = 0
-while i < 20 do 
+while i < 40 do 
     i = i + 1
     print(i)
     tracked_right()
     if i%2 == 0 then
         place_line_below(1,"minecraft:cobblestone")
-        mine_line(5)
+        mine_line(SWATH_WIDTH - 1)
     else
-        mine_line(6)
+        mine_line(SWATH_WIDTH)
     end    
     print("returning")
     tracked_right()
     tracked_right()
-    break_line(6)
+    break_line(SWATH_WIDTH)
     tracked_right()
+    -- place the rails and move to the next set of holes. 
     if i%POWERED_FREQ == 0 then
-        place_powered()
+	place_line_below(1, "minecraft:redstone_block")
+	set_item_self("minecraft:rail")
+	r.place(s.back)
+	place_line_below(1, "minecraft:cobblestone:")
+	set_item_self("minecraft:golden_rail")
+	r.place(s.back())
         i = 0
     else
-        place_regular()
+       	place_line_below(1, "minecraft:cobblestone")
+	set_item_self("minecraft:rail")
+	r.place(s.back)
+	place_line_below(1, "minecraft:cobblestone:")
+	set_item_self("minecraft:cobblestone")
+	r.place(s.back)
     end 
-    break_move()
-    break_move()
     os.sleep(1)
 end
 
