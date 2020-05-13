@@ -224,6 +224,7 @@ end
 function mine_line(length)
     for a = 0, length, 1 do
         if a%2 == 1 then
+            grab_supplies()
             mine_column()
             dump_goods()
             fuel_robot()
@@ -233,12 +234,26 @@ function mine_line(length)
     print(length)
 end
 
+function grap_supplies()
+
+end
+
 function mine_column()
 
 end
 
+--[[ 
+    Places an ender chest below the robot. Dumps the entire contents of the 
+    robot's inventory into the ender chest. Then picks up the ender chest. 
+]]--
 function dump_goods()
-    r.swingDown() 
+    r.swingDown()
+    set_item_self("enderstorage:ender_storage")
+    r.placeDown()
+    for i = 1, r.inventorySize(),  1 do
+       r.dropDown()
+    end
+    r.swingDown()
 end
 
 function fuel_robot()
