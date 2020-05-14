@@ -375,7 +375,7 @@ end
     Returns: false if the block is on the list or cannot be broken, else true. 
 ]]--
 function break_black(blacklist)
-    local temp = ge.analyze(s.front())
+    local temp = ge.analyze(s.front)
     for i, block in ipars(blacklist) do 
         if temp.name ~= nil and temp.name == block then
             return(false)
