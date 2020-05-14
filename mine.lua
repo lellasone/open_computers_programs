@@ -352,17 +352,26 @@ function mine_column(timeout)
     for i = 0, timeout, 1 do
    	tracked_down()
 	-- mine to all sides. 
-	for i = 0, 4, 1 do
+	for a = 1, 4, 1 do
 	    tracked_right()
 	    break_black(NO_MINE_LIST)
 	end
 	-- lets place our scaffold. 
 	set_item_self(SCAFFOLD_MATERIAL)
-	r.place()
+	-- make a cool swirl pattern
+        if z%1 = 0 then r.place(s.front) end
+	if z%2 = 0 then r.place(s.right) end
+  	if z%3 = 0 then r.place(s.back) end
+   	if z%4 = 0 then r.place(s.left) end
+	if(r.swingDown() == false) then break end
     end
     while z < z_start do
         set_item_self(SCAFFOLD_MATERIAL)
-        r.place(s.back())
+	-- make a cool swirl pattern
+        if z%1 = 0 then r.place(s.front) end
+	if z%2 = 0 then r.place(s.right) end
+  	if z%3 = 0 then r.place(s.back) end
+   	if z%4 = 0 then r.place(s.left) end
         break_up() 
     end
 end
@@ -376,7 +385,7 @@ end
 ]]--
 function break_black(blacklist)
     local temp = ge.analyze(s.front)
-    for i, block in ipars(blacklist) do 
+    for i, block in ipairs(blacklist) do 
         if temp.name ~= nil and temp.name == block then
             return(false)
         end
