@@ -348,7 +348,7 @@ function grab_supplies()
 end
 
 function mine_column(timeout)
-    local z_start = z 
+    local y_start = y 
     for i = 0, timeout, 1 do
    	tracked_down()
 	-- mine to all sides. 
@@ -360,12 +360,16 @@ function mine_column(timeout)
 	set_item_self(SCAFFOLD_MATERIAL)
 	-- make a cool swirl pattern
         r.place()
-	if(r.swingDown() == false) then break end
+	r.swingDown()
+	if (r.detect()) then break end
     end
-    while z < z_start do
+    print(y)
+    print(y_start)
+    print("heading up")
+    while y < y_start do
         set_item_self(SCAFFOLD_MATERIAL)
 	-- make a cool swirl pattern
-        r.place()
+        r.place(s.front)
         break_up() 
     end
 end
@@ -434,18 +438,34 @@ while i < 40 do
     if i%POWERED_FREQ == 0 then
 	place_line_below(1, "minecraft:redstone_block")
 	set_item_self("minecraft:rail")
-	r.place(s.back)
+	tracked_right()
+	tracked_right()
+	r.place(s.front)
+	tracked_right()
+	tracked_right()
 	place_line_below(1,SCAFFOLD_MATERIAL) 
 	set_item_self("minecraft:golden_rail")
-	r.place(s.back())
+	tracked_right()
+	tracked_right()
+	r.place(s.front)
+	tracked_right()
+	tracked_right()
         i = 0
     else
        	place_line_below(1, SCAFFOLD_MATERIAL)
 	set_item_self("minecraft:rail")
-	r.place(s.back)
+	tracked_right()
+	tracked_right()
+	r.place(s.front)
+	tracked_right()
+	tracked_right()
 	place_line_below(1,  SCAFFOLD_MATERIAL)
 	set_item_self(SCAFFOLD_MATERIAL)
-	r.place(s.back)
+	tracked_right()
+	tracked_right()
+	r.place(s.front)
+	tracked_right()
+	tracked_right()
     end 
     os.sleep(1)
 end
