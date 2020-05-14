@@ -384,8 +384,6 @@ function break_black(blacklist)
     return(r.swing())
 end 
 
-end
-
 --[[ 
     Places an ender chest below the robot. Dumps the entire contents of the 
     robot's inventory into the ender chest. Then picks up the ender chest. 
