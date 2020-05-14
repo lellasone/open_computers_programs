@@ -361,7 +361,7 @@ function mine_column(timeout)
 	-- make a cool swirl pattern
         r.place()
 	r.swingDown()
-	if (r.detect()) then break end
+	if (r.detectDown()) then break end
     end
     print(y)
     print(y_start)
