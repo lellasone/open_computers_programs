@@ -320,7 +320,11 @@ function mine_line(length)
     for a = 0, length, 1 do
         if a%2 == 1 then
             grab_supplies()
+	    tracked_right()
+	    tracked_right()
             mine_column(128)
+	    tracked_right()
+	    tracked_right()
 	    fuel_robot()
             dump_goods()
             grab_supplies()
@@ -359,16 +363,16 @@ function mine_column(timeout)
 	-- lets place our scaffold. 
 	set_item_self(SCAFFOLD_MATERIAL)
 	-- make a cool swirl pattern
-        r.place()
+        r.place(s.front)
 	r.swingDown()
 	if (r.detectDown()) then break end
     end
     print(y)
     print(y_start)
     while y < y_start do
+    	r.place(s.front)
         set_item_self(SCAFFOLD_MATERIAL)
 	-- make a cool swirl pattern
-        r.place(s.front)
         break_up() 
     end
     print("finished column")
