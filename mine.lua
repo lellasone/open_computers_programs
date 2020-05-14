@@ -3,6 +3,7 @@ local r = require("robot")
 local s = require("sides")
 local r = require("robot")
 local g = c.generator
+local ge = c.geolyzer
 local inventory = c.inventory_controller
 
 
@@ -208,8 +209,6 @@ function break_up()
       break_up() --hitting it worked, so lets keep trying.
     end
     return(false) --seems there's no point in hitting it more, lets give up. 
-  end
-end
 --[[
   This function moves the robot up one block and updates the y value appropriatly. 
   It should be used in place of robot.up
@@ -366,8 +365,22 @@ function mine_column(timeout)
     end
 end
 
+--[[
+    Breaks the block in front of the robot if that block is not on the
+    blacklist.
+    args: 
+        blacklist - list of strings containing block names not to break. 
+    Returns: false if the block is on the list or cannot be broken, else true. 
+]]--
 function break_black(blacklist)
-    print(blacklist) 
+    local temp = ge.analyze(s.front())
+    for i, block in ipars(blacklist) do 
+        if temp.name ~= nil and temp.name == block then
+            return(false)
+        end
+    end
+    return(r.swing())
+end 
 
 end
 
