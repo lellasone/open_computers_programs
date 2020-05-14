@@ -205,7 +205,7 @@ function break_up()
   if tracked_up() == true then
     return(true)
   else
-    if(r.swingUP()) then
+    if(r.swingUp()) then
       break_up() --hitting it worked, so lets keep trying.
     end
     return(false) --seems there's no point in hitting it more, lets give up. 
@@ -365,7 +365,6 @@ function mine_column(timeout)
     end
     print(y)
     print(y_start)
-    print("heading up")
     while y < y_start do
         set_item_self(SCAFFOLD_MATERIAL)
 	-- make a cool swirl pattern
