@@ -209,6 +209,8 @@ function break_up()
       break_up() --hitting it worked, so lets keep trying.
     end
     return(false) --seems there's no point in hitting it more, lets give up. 
+  end
+end
 --[[
   This function moves the robot up one block and updates the y value appropriatly. 
   It should be used in place of robot.up
