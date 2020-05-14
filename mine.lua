@@ -321,11 +321,11 @@ function mine_line(length)
         if a%2 == 1 then
             grab_supplies()
             mine_column(128)
+	    fuel_robot()
             dump_goods()
             grab_supplies()
-            fuel_robot()
         end
-        place_line_below(1, SCAFFOLD_MATERIAL)
+        place_line_below(2, SCAFFOLD_MATERIAL)
     end 
     print(length)
 end
@@ -371,6 +371,7 @@ function mine_column(timeout)
         r.place(s.front)
         break_up() 
     end
+    print("finished column")
 end
 
 --[[
