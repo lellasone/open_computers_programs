@@ -359,19 +359,19 @@ function mine_column(timeout)
 	-- lets place our scaffold. 
 	set_item_self(SCAFFOLD_MATERIAL)
 	-- make a cool swirl pattern
-        if z%1 = 0 then r.place(s.front) end
-	if z%2 = 0 then r.place(s.right) end
-  	if z%3 = 0 then r.place(s.back) end
-   	if z%4 = 0 then r.place(s.left) end
+        if z%1 == 0 then r.place(s.front) end
+	if z%2 == 0 then r.place(s.right) end
+  	if z%3 == 0 then r.place(s.back) end
+   	if z%4 == 0 then r.place(s.left) end
 	if(r.swingDown() == false) then break end
     end
     while z < z_start do
         set_item_self(SCAFFOLD_MATERIAL)
 	-- make a cool swirl pattern
-        if z%1 = 0 then r.place(s.front) end
-	if z%2 = 0 then r.place(s.right) end
-  	if z%3 = 0 then r.place(s.back) end
-   	if z%4 = 0 then r.place(s.left) end
+        if z%1 == 0 then r.place(s.front) end
+	if z%2 == 0 then r.place(s.right) end
+  	if z%3 == 0 then r.place(s.back) end
+   	if z%4 == 0 then r.place(s.left) end
         break_up() 
     end
 end
