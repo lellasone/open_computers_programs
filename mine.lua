@@ -339,7 +339,7 @@ end
 function swap_pick()
     set_item_self("minecraft:diamond_pickaxe")
     local slot = find_item_self("minecraft:diamond_pickaxe")
-    invenotry.equip()
+    inventory.equip()
     local pick = inventory.getStackInInternalSlot(slot)
     if pick.damage < MIN_DAMAGE then 
         r.drop() -- this pick is bad, lets toss it. 
