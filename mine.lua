@@ -401,7 +401,7 @@ end
 ]]--
 function wait_power()
     while computer.energy() / computer.maxEnergy() do
-    	add_fuel()
+    	fuel_robot()
 	os.sleep()
     end
 end
