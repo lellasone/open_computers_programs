@@ -320,6 +320,7 @@ end
 function mine_line(length)
     for a = 0, length, 1 do
         if a%2 == 1 then
+	    dump_goods()
             grab_supplies()
 	    swap_pick()
 	    tracked_right()
@@ -327,8 +328,6 @@ function mine_line(length)
             mine_column(128)
 	    tracked_right()
 	    tracked_right()
-            dump_goods()
-	    grab_supplies()
         end
         place_line_below(2, SCAFFOLD_MATERIAL)
     end 
@@ -399,8 +398,8 @@ end
 ]]--
 function break_black(blacklist)
     local temp = ge.analyze(s.front)
-    for i, block in ipairs(blacklist) do 
-        if temp.name ~= nil and temp.name == block then
+    for l, block in ipairs(blacklist) do 
+        if temp ~= nil and temp.name == block then
             return(false)
         end
     end
