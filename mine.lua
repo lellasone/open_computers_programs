@@ -399,8 +399,10 @@ end
 function break_black(blacklist)
     local temp = ge.analyze(s.front)
     for l, block in ipairs(blacklist) do 
-        if temp ~= nil and temp.name == block then
-            return(false)
+        if temp ~= nil then 
+	    if temp.name == block then
+                return(false)
+	    end
         end
     end
     return(r.swing())
