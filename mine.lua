@@ -438,14 +438,14 @@ while i < 40 do
     tracked_right()
     -- place the rails and move to the next set of holes. 
     if i%POWERED_FREQ == 0 then
-	place_line_below(1, "minecraft:redstone_block")
+	place_line_below(2, "minecraft:redstone_block")
 	set_item_self("minecraft:rail")
 	tracked_right()
 	tracked_right()
 	r.place(s.front)
 	tracked_right()
 	tracked_right()
-	place_line_below(1,SCAFFOLD_MATERIAL) 
+	place_line_below(2,SCAFFOLD_MATERIAL) 
 	set_item_self("minecraft:golden_rail")
 	tracked_right()
 	tracked_right()
@@ -454,14 +454,14 @@ while i < 40 do
 	tracked_right()
         i = 0
     else
-       	place_line_below(1, SCAFFOLD_MATERIAL)
+       	place_line_below(2, SCAFFOLD_MATERIAL)
 	set_item_self("minecraft:rail")
 	tracked_right()
 	tracked_right()
 	r.place(s.front)
 	tracked_right()
 	tracked_right()
-	place_line_below(1,  SCAFFOLD_MATERIAL)
+	place_line_below(2,  SCAFFOLD_MATERIAL)
 	set_item_self(SCAFFOLD_MATERIAL)
 	tracked_right()
 	tracked_right()
