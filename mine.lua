@@ -366,6 +366,7 @@ function mine_column(timeout)
     local y_start = y 
     for i = 0, timeout, 1 do
    	tracked_down()
+	wait_power() -- make sure we have the energy to move. 
 	-- mine to all sides. 
 	for a = 1, 4, 1 do
 	    tracked_right()
@@ -388,6 +389,22 @@ function mine_column(timeout)
     end
     print("finished column")
 end
+
+--[[ 
+    This function adds fuel and waits for the generator to recharge above the threshold
+    before allowing the robot to continue moving. It is blocking, and will not get more
+    fuel from an external inventory if it runs out. 
+    params: 
+        threshold - value between 0 and 1 specifying the min allowable ratio of max energy
+	            to current energy in the robot's buffers
+]]--
+function wait_power()
+    while computer.energy() / computer.maxEnergy() do
+    	add_fuel()
+	os.sleep()
+    end
+end
+
 
 --[[
     Breaks the block in front of the robot if that block is not on the
@@ -430,7 +447,8 @@ end
     so the robot needs to already have fuel in it's inventory. 
 ]]--
 function fuel_robot()
-    add_coal()
+    local temp = set_item_self("minecraft:coal")
+    if temp ~= nil then add_coal() end
 end
 
 
