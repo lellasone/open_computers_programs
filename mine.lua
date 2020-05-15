@@ -12,7 +12,7 @@ local SWATH_WIDTH  = 4 -- width to travel (mined width will be two greater)
 local SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
 -- List of items to not mine on the sides. These will still be broken if in the way of robot movement. 
 NO_MINE_LIST = {"minecraft:stone", SCAFFOLD_MATERIAL, "minecraft:dirt", "minecraft:glass"}
-
+local MIN_DAMAGE = 250
 
 -- by default the robot's "forward" is along z+ to start.
 local x = 0 --x axis position relative to reference
