@@ -367,7 +367,7 @@ function mine_column(timeout)
     local y_start = y 
     for i = 0, timeout, 1 do
    	tracked_down()
-	wait_power() -- make sure we have the energy to move. 
+	wait_power(0.1) -- make sure we have the energy to move. 
 	-- mine to all sides. 
 	for a = 1, 4, 1 do
 	    tracked_right()
@@ -399,8 +399,8 @@ end
         threshold - value between 0 and 1 specifying the min allowable ratio of max energy
 	            to current energy in the robot's buffers
 ]]--
-function wait_power()
-    while computer.energy() / computer.maxEnergy() do
+function wait_power(threshold)
+    while computer.energy() / computer.maxEnergy() < threshold do
     	fuel_robot()
 	os.sleep()
     end
@@ -459,6 +459,7 @@ local ii = 0
 while ii < 40 do 
     ii = ii + 1
     print(i)
+    print(chunk.isActive())
     tracked_right()
     if ii%2 == 1 then
         place_line_below(2,SCAFFOLD_MATERIAL)
