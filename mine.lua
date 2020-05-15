@@ -2,6 +2,7 @@ local c = require("component")
 local r = require("robot")
 local s = require("sides")
 local r = require("robot")
+local computer = require("computer")
 local g = c.generator
 local ge = c.geolyzer
 local inventory = c.inventory_controller
