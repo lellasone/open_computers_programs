@@ -434,7 +434,7 @@ end
 
 
 print_inventory() 
-print(chunk.setActive(true)
+print(chunk.setActive(true))
 local ii = 0
 while ii < 40 do 
     ii = ii + 1
