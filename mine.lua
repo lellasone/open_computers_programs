@@ -5,6 +5,7 @@ local r = require("robot")
 local g = c.generator
 local ge = c.geolyzer
 local inventory = c.inventory_controller
+local chunk = c.chunkloader
 
 
 local POWERED_FREQ = 16
@@ -433,6 +434,7 @@ end
 
 
 print_inventory() 
+print(chunk.setActive(true)
 local ii = 0
 while ii < 40 do 
     ii = ii + 1
