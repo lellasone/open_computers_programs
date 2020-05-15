@@ -327,6 +327,7 @@ function mine_line(length)
 	    tracked_right()
 	    tracked_right()
             dump_goods()
+	    grab_supplies()
         end
         place_line_below(2, SCAFFOLD_MATERIAL)
     end 
