@@ -7,8 +7,8 @@ local ge = c.geolyzer
 local inventory = c.inventory_controller
 
 
-local POWERED_FREQ = 5
-local SWATH_WIDTH  = 14 -- width to travel (mined width will be two greater)
+local POWERED_FREQ = 3
+local SWATH_WIDTH  = 4 -- width to travel (mined width will be two greater)
 local SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
 -- List of items to not mine on the sides. These will still be broken if in the way of robot movement. 
 NO_MINE_LIST = {"minecraft:stone", SCAFFOLD_MATERIAL, "minecraft:dirt", "minecraft:glass"}
@@ -420,13 +420,13 @@ end
 
 
 print_inventory() 
-local i = 0
-while i < 40 do 
-    i = i + 1
+local ii = 0
+while ii < 40 do 
+    ii = ii + 1
     print(i)
     tracked_right()
-    if i%2 == 0 then
-        place_line_below(1,SCAFFOLD_MATERIAL)
+    if ii%2 == 1 then
+        place_line_below(2,SCAFFOLD_MATERIAL)
         mine_line(SWATH_WIDTH - 1)
     else
         mine_line(SWATH_WIDTH)
@@ -437,7 +437,7 @@ while i < 40 do
     break_line(SWATH_WIDTH)
     tracked_right()
     -- place the rails and move to the next set of holes. 
-    if i%POWERED_FREQ == 0 then
+    if ii%POWERED_FREQ == 0 then
 	place_line_below(2, "minecraft:redstone_block")
 	set_item_self("minecraft:rail")
 	tracked_right()
@@ -452,7 +452,7 @@ while i < 40 do
 	r.place(s.front)
 	tracked_right()
 	tracked_right()
-        i = 0
+        ii = 0
     else
        	place_line_below(2, SCAFFOLD_MATERIAL)
 	set_item_self("minecraft:rail")
