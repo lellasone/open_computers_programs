@@ -320,6 +320,7 @@ function mine_line(length)
     for a = 0, length, 1 do
         if a%2 == 1 then
             grab_supplies()
+	    swap_pick()
 	    tracked_right()
 	    tracked_right()
             mine_column(128)
@@ -332,6 +333,19 @@ function mine_line(length)
         place_line_below(2, SCAFFOLD_MATERIAL)
     end 
     print(length)
+end
+
+
+function swap_pick()
+    set_item_self("minecraft:diamond_pickaxe")
+    local slot = find_item_self("minecraft:diamond_pickaxe")
+    invenotry.equip()
+    local pick = inventory.getStackInInternalSlot(slot)
+    if pick.damage < MIN_DAMAGE then 
+        r.drop() -- this pick is bad, lets toss it. 
+    else 
+        inventory.equip() -- it's fine, lets keep it equiped. 
+    end
 end
 
 
@@ -462,7 +476,7 @@ while ii < 40 do
 	tracked_right()
 	tracked_right()
 	place_line_below(2,  SCAFFOLD_MATERIAL)
-	set_item_self(SCAFFOLD_MATERIAL)
+	set_item_self("minecraft:rail")
 	tracked_right()
 	tracked_right()
 	r.place(s.front)
