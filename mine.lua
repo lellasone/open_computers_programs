@@ -12,7 +12,7 @@ local SWATH_WIDTH  = 4 -- width to travel (mined width will be two greater)
 local SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
 -- List of items to not mine on the sides. These will still be broken if in the way of robot movement. 
 NO_MINE_LIST = {"minecraft:stone", SCAFFOLD_MATERIAL, "minecraft:dirt", "minecraft:glass"}
-local MIN_DAMAGE = 250
+local MAX_DAMAGE = 1250 --max damage a pick is allowed to take. 
 
 -- by default the robot's "forward" is along z+ to start.
 local x = 0 --x axis position relative to reference
@@ -320,6 +320,7 @@ function mine_line(length)
     for a = 0, length, 1 do
         if a%2 == 1 then
             grab_supplies()
+	    fuel_robot()
 	    swap_pick()
 	    tracked_right()
 	    tracked_right()
@@ -327,8 +328,6 @@ function mine_line(length)
 	    tracked_right()
 	    tracked_right()
             dump_goods()
-            grab_supplies()
-	    fuel_robot()
         end
         place_line_below(2, SCAFFOLD_MATERIAL)
     end 
@@ -341,7 +340,7 @@ function swap_pick()
     local slot = find_item_self("minecraft:diamond_pickaxe")
     inventory.equip()
     local pick = inventory.getStackInInternalSlot(slot)
-    if pick.damage < MIN_DAMAGE then 
+    if pick.damage > MAX_DAMAGE then 
         r.drop() -- this pick is bad, lets toss it. 
     else 
         inventory.equip() -- it's fine, lets keep it equiped. 
@@ -356,9 +355,9 @@ function grab_supplies()
     get_item_other(s.bottom, "minecraft:coal", 64)
     get_item_other(s.bottom, SCAFFOLD_MATERIAL, 128)
     get_item_other(s.bottom, "minecraft:diamond_pickaxe",1)
-    get_item_other(s.bottom, "minecraft:redstone_block",32)
-    get_item_other(s.bottom, "minecraft:golden_rail", 32)
-    get_item_other(s.bottom, "minecraft:rail", 32)
+    get_item_other(s.bottom, "minecraft:redstone_block",8)
+    get_item_other(s.bottom, "minecraft:golden_rail", 8)
+    get_item_other(s.bottom, "minecraft:rail", 8)
     add_coal() -- can't be too careful. 
     r.swingDown()
 end
