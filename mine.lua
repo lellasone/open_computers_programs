@@ -320,7 +320,6 @@ function mine_line(length)
     for a = 0, length, 1 do
         if a%2 == 1 then
             grab_supplies()
-	    fuel_robot()
 	    swap_pick()
 	    tracked_right()
 	    tracked_right()
