@@ -377,7 +377,7 @@ function mine_column(timeout)
 	-- lets place our scaffold. 
 	set_item_self(SCAFFOLD_MATERIAL)
 	-- make a cool swirl pattern
-        r.place(s.front)
+        r.place(s.left)
 	r.swingDown()
 	if (r.detectDown()) then break end
     end
