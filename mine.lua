@@ -396,7 +396,8 @@ end
     Turn the robot right until it is facing in the desired direction in global cords. 
     This function uses tracked movement. 
     args:
-        side - the side to head too. 
+        side - the side to head too.
+]]--
 function set_heading(side)
    while h ~= side do
    	tracked_right()
