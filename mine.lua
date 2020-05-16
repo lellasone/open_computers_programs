@@ -373,7 +373,7 @@ function mine_column(timeout)
 	    tracked_right()
 	    break_black(NO_MINE_LIST)
 	end
-	set_heading(s.front)
+	set_heading(s.left)
 	-- lets place our scaffold. 
 	set_item_self(SCAFFOLD_MATERIAL)
 	-- make a cool swirl pattern
