@@ -367,12 +367,13 @@ function mine_column(timeout)
     local y_start = y 
     for i = 0, timeout, 1 do
    	tracked_down()
-	wait_power(0.1) -- make sure we have the energy to move. 
+	wait_power(0.2) -- make sure we have the energy to move. 
 	-- mine to all sides. 
-	for a = 1, 4, 1 do
+	for a = 1, 2, 1 do
 	    tracked_right()
 	    break_black(NO_MINE_LIST)
 	end
+	set_heading(s.front)
 	-- lets place our scaffold. 
 	set_item_self(SCAFFOLD_MATERIAL)
 	-- make a cool swirl pattern
@@ -391,6 +392,16 @@ function mine_column(timeout)
     print("finished column")
 end
 
+--[[ 
+    Turn the robot right until it is facing in the desired direction in global cords. 
+    This function uses tracked movement. 
+    args:
+        side - the side to head too. 
+function set_heading(side)
+   while h ~= side do
+   	tracked_right()
+   end
+end
 --[[ 
     This function adds fuel and waits for the generator to recharge above the threshold
     before allowing the robot to continue moving. It is blocking, and will not get more
