@@ -16,12 +16,15 @@
     be configured to extract those materials as well. The number of robots
     which can share a chest is determined by the material extraction and 
     supply speed. Generally extraction is the limit rather than supply. 
+    
+    The robot should be configured as follows. It will be nessary to
+    install the os on the hard drive before use. 
+
 
     Note: Cobble is self sustaining as a scaffold material for low-height 
           mining, but not if the robot begins near world-height. Coal is
           not energy positive at any height and must thus be suplimented
-          if used as the fuel sorce. 
---]] 
+          if used as the fuel sorce.  
 
     Ender Chest Contents: 
         (176x) Scaffold Material. 
@@ -47,6 +50,8 @@
         (1x) Tier 3 CPU. 
         (1x) Graphics Card. 
         (1x) Internet Card.
+        (1x) Generator.
+        (1x) LUA ROM.
 ]]--
 
 local c = require("component")
@@ -63,6 +68,7 @@ local chunk = c.chunkloader
 local POWERED_FREQ = 16
 local SWATH_WIDTH  = 14 -- width to travel (mined width will be two greater)
 local SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
+local FUEL_MATERIAL = ""
 -- List of items to not mine on the sides. These will still be broken if in the way of robot movement. 
 NO_MINE_LIST = {"minecraft:stone", SCAFFOLD_MATERIAL, "minecraft:dirt", "minecraft:glass"}
 local MAX_DAMAGE = 1250 --max damage a pick is allowed to take. 
@@ -404,7 +410,7 @@ function grab_supplies()
     r.swingDown()
     set_item_self("enderstorage:ender_storage")
     r.placeDown()
-    get_item_other(s.bottom, "minecraft:coal", 64)
+    get_item_other(s.bottom, "minecraft:coal", 8)
     get_item_other(s.bottom, SCAFFOLD_MATERIAL, 128)
     get_item_other(s.bottom, "minecraft:diamond_pickaxe",1)
     get_item_other(s.bottom, "minecraft:redstone_block",8)
