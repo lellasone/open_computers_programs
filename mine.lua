@@ -68,7 +68,7 @@ local chunk = c.chunkloader
 local POWERED_FREQ = 16
 local SWATH_WIDTH  = 14 -- width to travel (mined width will be two greater)
 local SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
-local FUEL_MATERIAL = ""
+local FUEL_MATERIAL = "thermalfoundation:material"
 -- List of items to not mine on the sides. These will still be broken if in the way of robot movement. 
 NO_MINE_LIST = {"minecraft:stone", SCAFFOLD_MATERIAL, "minecraft:dirt", "minecraft:glass"}
 local MAX_DAMAGE = 1250 --max damage a pick is allowed to take. 
@@ -186,7 +186,7 @@ end
 function add_coal()
   local old_slot = r.select()
   if g.count() < 64 then
-    if set_item_self("minecraft:coal") then
+    if set_item_self(FUEL_MATERIAL) then
       g.insert(64) --add fuel to the generator
       r.select(old_slot)
       return('true')
@@ -410,7 +410,7 @@ function grab_supplies()
     r.swingDown()
     set_item_self("enderstorage:ender_storage")
     r.placeDown()
-    get_item_other(s.bottom, "minecraft:coal", 8)
+    get_item_other(s.bottom, FUEL_MATERIAL, 8)
     get_item_other(s.bottom, SCAFFOLD_MATERIAL, 128)
     get_item_other(s.bottom, "minecraft:diamond_pickaxe",1)
     get_item_other(s.bottom, "minecraft:redstone_block",8)
@@ -517,7 +517,7 @@ end
     so the robot needs to already have fuel in it's inventory. 
 ]]--
 function fuel_robot()
-    local temp = set_item_self("minecraft:coal")
+    local temp = set_item_self(FUEL_MATERIAL)
     if temp ~= nil then add_coal() end
 end
 
