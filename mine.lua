@@ -426,10 +426,10 @@ function mine_column(timeout)
    	tracked_down()
 	wait_power(0.2) -- make sure we have the energy to move. 
 	-- mine to all sides. 
-	for a = 1, 2, 1 do
-	    tracked_right()
-	    break_black(NO_MINE_LIST)
-	end
+        break_black(NO_MINE_LIST)
+        tracked_right()
+        break_black(NO_MINE_LIST)
+        tracked_left()
 	set_heading(s.left)
 	-- lets place our scaffold. 
 	set_item_self(SCAFFOLD_MATERIAL)
