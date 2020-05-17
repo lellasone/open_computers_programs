@@ -1,3 +1,54 @@
+--[[
+    This program moves forward indefinitly mining a patch of specified 
+    width in a straight line. Blocks can be blacklisted for mining, but    
+    note that alrge cobble towers will render mined areas unusable. This
+    program is appropriate for mining when power is at a premium, or when 
+    the end has not yet been reached
+
+    The robot is to be placed one block in from the left side of the chunk
+    to be mined. A pick, block of scaffold material, and encoded ender 
+    chest should be placed in it's inventory before activation. 
+
+    The ender chest should be set up to maintain the specified quantity of 
+    each material (below) and should rapidly extract all other materials
+    placed into the chest. If the scaffold material or fuel overlap with 
+    mined materiasl (say using cobble for the scaffold) the chest should
+    be configured to extract those materials as well. The number of robots
+    which can share a chest is determined by the material extraction and 
+    supply speed. Generally extraction is the limit rather than supply. 
+
+    Note: Cobble is self sustaining as a scaffold material for low-height 
+          mining, but not if the robot begins near world-height. Coal is
+          not energy positive at any height and must thus be suplimented
+          if used as the fuel sorce. 
+--]] 
+
+    Ender Chest Contents: 
+        (176x) Scaffold Material. 
+        (128x) Fuel Material.
+        (20x)  Redstone Block. 
+        (20x)  Powered Rail. 
+        (20x)  Normal Rail. 
+        (1x)   Pick (Diamond Tier). 
+    Robot Components: 
+        (1x) Tier 3 case. 
+        (2x) Inventory Upgrade.
+        (1x) Tier 2 upgrade.
+        (1x) Tier 3 upgrade.
+        (1x) Keyboard. 
+        (1x) Screen Tier 1. 
+        (1x) Solar Generator. 
+        (1x) Angle Upgrade.
+        (1x) Inventory Controller.
+        (1x) Chunkloader Upgrade.
+        (1x) Geolyzer. 
+        (2x) 2mb Ram. 
+        (1x) 1mb Hard Drive. 
+        (1x) Tier 3 CPU. 
+        (1x) Graphics Card. 
+        (1x) Internet Card.
+]]--
+
 local c = require("component")
 local r = require("robot")
 local s = require("sides")
