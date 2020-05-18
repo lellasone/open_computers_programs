@@ -68,7 +68,7 @@ local chunk = c.chunkloader
 local POWERED_FREQ = 16
 local SWATH_WIDTH  = 14 -- width to travel (mined width will be two greater)
 local SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
-local FUEL_MATERIAL = "thermalfoundation:material"
+local FUEL_MATERIAL = "ic2:itemcellempty"
 -- List of items to not mine on the sides. These will still be broken if in the way of robot movement. 
 NO_MINE_LIST = {"minecraft:stone", SCAFFOLD_MATERIAL, "minecraft:dirt", "minecraft:glass"}
 local MAX_DAMAGE = 1250 --max damage a pick is allowed to take. 
