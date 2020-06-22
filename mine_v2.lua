@@ -71,6 +71,7 @@ local POWERED_FREQ = 16
 local SWATH_WIDTH  = 14 -- width to travel (mined width will be two greater)
 local SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
 local FUEL_MATERIAL = "ic2:itemcellempty"
+local PICK_MATERIAL = "powersuits:power_fist"
 -- List of items to not mine on the sides. These will still be broken if in the way of robot movement. 
 NO_MINE_LIST = {"minecraft:stone", SCAFFOLD_MATERIAL, "minecraft:dirt", "minecraft:glass"}
 local MAX_DAMAGE = 1250 --max damage a pick is allowed to take. 
@@ -394,14 +395,19 @@ function mine_line(length)
     print(length)
 end
 
-
+--[[
+    This function replaces the active pick with the spare pick if the active pick
+    is below the specified damage level. This should be called regularly to ensure
+    that the robot does not run out of pick capacity. 
+    Precondition: A spare pick of the correct type in the robot's inventory. 
+]]--
 function swap_pick()
-    set_item_self("minecraft:diamond_pickaxe")
-    local slot = find_item_self("minecraft:diamond_pickaxe")
+    set_item_self(PICK_MATERIAL)
+    local slot = find_item_self(PICK_MATERIAL)
     inventory.equip()
     local pick = inventory.getStackInInternalSlot(slot)
     if pick.damage > MAX_DAMAGE then 
-        r.drop() -- this pick is bad, lets toss it. 
+        inventory.equip() -- pick low on energy, swap.  
     else 
         inventory.equip() -- it's fine, lets keep it equiped. 
     end
@@ -414,7 +420,7 @@ function grab_supplies()
     r.placeDown()
     get_item_other(s.bottom, FUEL_MATERIAL, 8)
     get_item_other(s.bottom, SCAFFOLD_MATERIAL, 128)
-    get_item_other(s.bottom, "minecraft:diamond_pickaxe",1)
+    get_item_other(s.bottom, PICK_MATERIAL,1)
     get_item_other(s.bottom, "minecraft:redstone_block",8)
     get_item_other(s.bottom, "minecraft:golden_rail", 8)
     get_item_other(s.bottom, "minecraft:rail", 8)
@@ -430,7 +436,7 @@ function mine_column(timeout)
 	-- mine to all sides. 
         break_black(NO_MINE_LIST)
         tracked_right()
-        break_black(NO_MINE_LIST)
+        break_black(NO_MINE_LIST)tollic TrueSTUDIO
         tracked_left()
 	set_heading(s.left)
 	-- lets place our scaffold. 
