@@ -69,7 +69,7 @@ local chunk = c.chunkloader
 
 local POWERED_FREQ = 16
 local SWATH_WIDTH  = 14 -- width to travel (mined width will be two greater)
-local SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
+local SCAFFOLD_MATERIAL = "minecraft:stone" -- what block to use for movement scaffolds.
 local FUEL_MATERIAL = "ic2:itemcellempty"
 local PICK_MATERIAL = "powersuits:power_fist"
 -- List of items to not mine on the sides. These will still be broken if in the way of robot movement. 
