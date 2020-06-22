@@ -436,7 +436,7 @@ function mine_column(timeout)
 	-- mine to all sides. 
         break_black(NO_MINE_LIST)
         tracked_right()
-        break_black(NO_MINE_LIST)tollic TrueSTUDIO
+        break_black(NO_MINE_LIST)
         tracked_left()
 	set_heading(s.left)
 	-- lets place our scaffold. 
