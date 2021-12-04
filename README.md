@@ -8,7 +8,6 @@ mine.lua - a good mid-tier mining program. This is a single robot mining
            uses a scaffolding system for movement (thus no hover required)
            and an ender-chest for item transport. Moderate additional 
            infrestructure is required to maintain the chest. 
-
            I would consider this to be moderatly reliable. Robots should
            bring in well more than their cost before ultimatly getting
            stuck. 
