@@ -15,7 +15,7 @@ destroyers a common first command within the Allied fleet.
 
 ## Weapons
 The GS has six T2 launchers arranged as a single battery. They are fed by
-a single obsideon chest and the ship can reliably fire about 3 volleys
+a single obsideon chest and the ship can reliably fire one volley
 per minute. The GS lacks a fire control computer, but has two balconies
 and a protected roof which can be used to manually target the launchers 
 with a radar gun or laser-designator. 
@@ -75,3 +75,8 @@ require dynamic targeting thethe GS should aim to engage from extreme distances
 where it's mobility and small size will make it essentially unhitable. The 
 dangerzone is ranges to large to allow for visual targeting, but too close to
 allow the GS to jump automatically targeted volleys. 
+
+
+In a symetrical fight it takes about 12 volleys for one GS to dissable another
+using purely breaching missiles, and about 4 volleys if heavier T2 missiles
+are mixed in. 
