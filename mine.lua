@@ -27,7 +27,7 @@
           if used as the fuel sorce.  
 
     Ender Chest Contents: 
-        (176x) Scaffold Material. 
+        (256x) Scaffold Material. 
         (128x) Fuel Material.
         (20x)  Redstone Block. 
         (20x)  Powered Rail. 
@@ -52,6 +52,9 @@
         (1x) Internet Card.
         (1x) Generator.
         (1x) LUA ROM.
+
+    Changelog:
+        1.1 - Place filler on all four sides and down.
 ]]--
 
 local c = require("component")
@@ -208,7 +211,7 @@ end
   it is done placing blocks. 
   args: 
     item - type of block to place, for example "minecraft:dirt"
-    length - distance to place blocks. 
+    leng256- distance to place blocks. 
 --]]
 function place_line_below(length, item)
   local loc = 1
@@ -411,7 +414,7 @@ function grab_supplies()
     set_item_self("enderstorage:ender_storage")
     r.placeDown()
     get_item_other(s.bottom, FUEL_MATERIAL, 8)
-    get_item_other(s.bottom, SCAFFOLD_MATERIAL, 128)
+    get_item_other(s.bottom, SCAFFOLD_MATERIAL, 192)
     get_item_other(s.bottom, "minecraft:diamond_pickaxe",1)
     get_item_other(s.bottom, "minecraft:redstone_block",8)
     get_item_other(s.bottom, "minecraft:golden_rail", 8)
@@ -425,15 +428,16 @@ function mine_column(timeout)
     for i = 0, timeout, 1 do
    	tracked_down()
 	wait_power(0.2) -- make sure we have the energy to move. 
+	set_item_self(SCAFFOLD_MATERIAL)
 	-- mine to all sides. 
         break_black(NO_MINE_LIST)
+        r.place(s.front)
         tracked_right()
         break_black(NO_MINE_LIST)
+        r.place(s.front)
         tracked_left()
 	set_heading(s.left)
 	-- lets place our scaffold. 
-	set_item_self(SCAFFOLD_MATERIAL)
-	-- make a cool swirl pattern
         r.place(s.left)
 	r.swingDown()
 	if (r.detectDown()) then break end
@@ -443,7 +447,6 @@ function mine_column(timeout)
     while y < y_start do
     	r.place(s.front)
         set_item_self(SCAFFOLD_MATERIAL)
-	-- make a cool swirl pattern
         break_up() 
     end
     print("finished column")
