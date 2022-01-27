@@ -443,6 +443,7 @@ function mine_column(timeout)
         tracked_right()
         break_black(NO_MINE_LIST)
         r.place(s.front)
+        tracked_right()
 	-- lets place our scaffold. 
 	r.swingDown()
 	if (r.detectDown()) then break end
