@@ -220,7 +220,7 @@ function place_line_below(length, item)
   r.placeDown()
   while loc < length do
     break_move()
-    r.break_up()
+    break_up()
     set_item_self(item) -- go to a stack of our blocks. 
     r.placeDown()
 
@@ -539,7 +539,7 @@ while ii < 40 do
     print(chunk.isActive())
     tracked_right()
     if ii%2 == 1 then
-        r.break_up 
+        break_up 
         place_line_below(2,SCAFFOLD_MATERIAL)
         mine_line(SWATH_WIDTH - 1)
     else
