@@ -205,6 +205,24 @@ function add_coal()
 end
 
 --[[
+  This function will attempt to break the block above it and then move into 
+  that space. This function will continue to attempt to break blocks and move for 
+  as long as its block breaks are succesful. If it is unable to break the block it
+  will give up. This is a tracked movement. 
+  returns: true if move succesful, false if can't break. 
+--]]
+function break_up()
+  if tracked_up() == true then
+    return(true)
+  else
+    if(r.swingUp()) then
+      break_up() --hitting it worked, so lets keep trying.
+    end
+    return(false) --seems there's no point in hitting it more, lets give up. 
+  end
+end
+
+--[[
   This function will place a line of blocks below the robot. It will automatically
   switch from one stack to another as needed, but does not check that enough blocks
   are in inventory before starting. Stacks will be used from low to high according
@@ -253,24 +271,6 @@ function break_move()
   else
     if(r.swing()) then
       break_move() --hitting it worked, so lets keep trying.
-    end
-    return(false) --seems there's no point in hitting it more, lets give up. 
-  end
-end
-
---[[
-  This function will attempt to break the block above it and then move into 
-  that space. This function will continue to attempt to break blocks and move for 
-  as long as its block breaks are succesful. If it is unable to break the block it
-  will give up. This is a tracked movement. 
-  returns: true if move succesful, false if can't break. 
---]]
-function break_up()
-  if tracked_up() == true then
-    return(true)
-  else
-    if(r.swingUp()) then
-      break_up() --hitting it worked, so lets keep trying.
     end
     return(false) --seems there's no point in hitting it more, lets give up. 
   end
