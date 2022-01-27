@@ -539,7 +539,6 @@ while ii < 40 do
     print(chunk.isActive())
     tracked_right()
     if ii%2 == 1 then
-        break_up()
         place_line_below(2,SCAFFOLD_MATERIAL)
         mine_line(SWATH_WIDTH - 1)
     else
