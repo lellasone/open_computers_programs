@@ -55,6 +55,7 @@
 
     Changelog:
         1.1 - Place filler on all four sides and down.
+        1.2 - clears a 2 high space above, breaks on all sides.
 ]]--
 
 local c = require("component")
@@ -219,6 +220,7 @@ function place_line_below(length, item)
   r.placeDown()
   while loc < length do
     break_move()
+    r.break_up()
     set_item_self(item) -- go to a stack of our blocks. 
     r.placeDown()
 
@@ -435,10 +437,13 @@ function mine_column(timeout)
         tracked_right()
         break_black(NO_MINE_LIST)
         r.place(s.front)
-        tracked_left()
-	set_heading(s.left)
+        tracked_right()
+        break_black(NO_MINE_LIST)
+        r.place(s.front)
+        tracked_right()
+        break_black(NO_MINE_LIST)
+        r.place(s.front)
 	-- lets place our scaffold. 
-        r.place(s.left)
 	r.swingDown()
 	if (r.detectDown()) then break end
     end
@@ -534,6 +539,7 @@ while ii < 40 do
     print(chunk.isActive())
     tracked_right()
     if ii%2 == 1 then
+        r.break_up 
         place_line_below(2,SCAFFOLD_MATERIAL)
         mine_line(SWATH_WIDTH - 1)
     else
