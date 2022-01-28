@@ -75,7 +75,7 @@ local SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movem
 local FUEL_MATERIAL = "ic2:itemcellempty"
 -- List of items to not mine on the sides. These will still be broken if in the way of robot movement. 
 NO_MINE_LIST = {"minecraft:stone", SCAFFOLD_MATERIAL, "minecraft:dirt", "minecraft:glass","minecraft:netherrack"}
-local MAX_DAMAGE = 1250 --max damage a pick is allowed to take. 
+local MAX_DAMAGE = 1531 --max damage a pick is allowed to take. 
 
 -- by default the robot's "forward" is along z+ to start.
 local x = 0 --x axis position relative to reference
@@ -403,6 +403,8 @@ function swap_pick()
     local slot = find_item_self("minecraft:diamond_pickaxe")
     inventory.equip()
     local pick = inventory.getStackInInternalSlot(slot)
+    print(pick.damage)
+    print(pick.maxDamage)
     if pick.damage > MAX_DAMAGE then 
         r.drop() -- this pick is bad, lets toss it. 
     else 
@@ -428,6 +430,7 @@ end
 function mine_column(timeout)
     local y_start = y 
     for i = 0, timeout, 1 do
+        swap_pick()
    	tracked_down()
 	wait_power(0.2) -- make sure we have the energy to move. 
 	-- mine to all sides. 
