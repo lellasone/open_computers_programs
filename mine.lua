@@ -488,10 +488,12 @@ end
 	            to current energy in the robot's buffers
 ]]--
 function wait_power(threshold)
+    print("waiting for power")
     while computer.energy() / computer.maxEnergy() < threshold do
     	fuel_robot()
 	os.sleep(0)
     end
+    print("power gotten")
 end
 
 
