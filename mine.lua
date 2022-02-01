@@ -241,7 +241,8 @@ function place_line_below(length, item)
     r.swingUp()
     set_item_self(item) -- go to a stack of our blocks. 
     r.placeDown()
-
+    
+    os.sleep(0)
     loc = loc + 1
   end
 
@@ -453,13 +454,15 @@ function mine_column(timeout)
 	-- lets place our scaffold. 
 	r.swingDown()
 	if (r.detectDown()) then break end
+        os.sleep(0)
     end
     print(y)
     print(y_start)
     while y < y_start do
     	r.place(s.front)
         set_item_self(SCAFFOLD_MATERIAL)
-        break_up() 
+        break_up()
+        os.sleep()
     end
     print("finished column")
 end
@@ -473,6 +476,7 @@ end
 function set_heading(side)
    while h ~= side do
    	tracked_right()
+        os.sleep(0)
    end
 end
 --[[ 
@@ -486,7 +490,7 @@ end
 function wait_power(threshold)
     while computer.energy() / computer.maxEnergy() < threshold do
     	fuel_robot()
-	os.sleep()
+	os.sleep(0)
     end
 end
 
