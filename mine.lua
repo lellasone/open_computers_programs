@@ -385,6 +385,32 @@ function tracked_move()
   
 end
 
+--[[
+  This function moves the robot backward relative to it's current heading and 
+  updates the tracking coordinates appropriatly to match. If the robot does 
+  not move then the coordinates will not be updated. This should be moved 
+  in place of backward() in pretty much all 
+  cases. 
+]]--
+function tracked_back()
+  if (r.backward()) then
+    if h == s.front then
+      z = z - 1
+    elseif h == s.back then
+      z = z + 1
+    elseif h == s.left then
+      x = x - 1
+    elseif h == s.right then 
+      x = x + 1 
+    else
+      error("invalid h")
+    end
+    save_position()
+    return(true)
+  end
+  return(nil)
+  
+end
 
 --[[ This function column-mines for the specified number of blocks in a straght
     line. The robot will mine a column every other block along the line and 
@@ -558,10 +584,62 @@ function fuel_robot()
     if temp ~= nil then add_coal() end
 end
 
+--[[
+    This function takes the robot back to it's last known starting location
+--]]
+function return_home()
+    local file = io.open("state.txt","r")
+    if f~=nil then
+        print("state file detected, returning to home")
+        file:close()
+        lines = io.lines("state.txt")
+        x = lines[0]
+        y = lines[1]
+        z = lines[2]
+        h = lines[3]
 
+        print("Going to the correct height")
+        while(y<0) do
+            tracked_up()
+        end
+        while(y>0) do
+            tracked_down()
+        end
 
+        print("going to the correct x")
+        if(x~=0) then
+            while(h~=s.right) do
+                tracked_right()
+            end
+            while(x<0) do
+                tracked_move()
+            end
+            while(x>0) do
+                tracked_back()
+            end
+        end
+
+        print("going to correct z")
+        if(z~=0) then
+            while(h~=s.front) do
+                tracked_right()
+            end
+            while(z<0) do
+                tracked_move()
+            end
+            while(z>0) do
+                tracked_back()
+            end
+        end
+            
+    else
+        file:close()
+    end
+end
+    
 print_inventory() 
 print(chunk.setActive(true))
+return_home()
 local ii = 0
 while ii < 40 do 
     ii = ii + 1
