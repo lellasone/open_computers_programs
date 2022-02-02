@@ -394,7 +394,7 @@ end
   cases. 
 ]]--
 function tracked_back()
-  if (r.backward()) then
+  if (r.back()) then
     if h == s.front then
       z = z - 1
     elseif h == s.back then
