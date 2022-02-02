@@ -633,6 +633,7 @@ function return_home()
         end
             
     else
+        print("no state file found")
         file:close()
     end
 end
