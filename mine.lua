@@ -373,9 +373,9 @@ function tracked_move()
     elseif h == s.back then
       z = z - 1
     elseif h == s.left then
-      x = x + 1
+      x = x - 1
     elseif h == s.right then 
-      x = x - 1 
+      x = x + 1 
     else
       error("invalid h")
     end
@@ -400,9 +400,9 @@ function tracked_back()
     elseif h == s.back then
       z = z + 1
     elseif h == s.left then
-      x = x - 1
+      x = x + 1
     elseif h == s.right then 
-      x = x + 1 
+      x = x - 1 
     else
       error("invalid h")
     end
