@@ -108,7 +108,17 @@ function set_item_self(item)
   end
 end
 
-
+--[[
+  Write the current robot cordinants (local) to a file. 
+--]]
+function save_position()
+    file = io.open("state.txt")
+    file:write(x,"\n")
+    file:write(y,"\n")
+    file:write(z,"\n")
+    file:flush()
+    file:close()
+end
 
 --[[
   Find the first instance of the specified item in an adjacent storage 
@@ -283,6 +293,7 @@ end
 function tracked_up()
   if(r.up()) then
     y = y + 1
+    save_position()
     return(true)
   end
   return(nil)
@@ -295,6 +306,7 @@ end
 function tracked_down()
   if(r.down()) then
     y = y-1
+    save_position()
     return(true)
   end
   return(false)
@@ -318,6 +330,7 @@ function tracked_left()
   else
     error ("invalid h")
   end
+  save_position()
 end
 
 
@@ -340,6 +353,7 @@ function tracked_right()
   else
     error ("invalid h")
   end
+  save_position()
 end
 
 
@@ -363,6 +377,7 @@ function tracked_move()
     else
       error("invalid h")
     end
+    save_position()
     return(true)
   end
   return(nil)
@@ -543,13 +558,17 @@ function fuel_robot()
 end
 
 
+
 print_inventory() 
 print(chunk.setActive(true))
 local ii = 0
 while ii < 40 do 
     ii = ii + 1
     print(i)
-    print(chunk.isActive())
+    y = 0
+    z = 0
+    z = 0
+    h = 0
     tracked_right()
     if ii%2 == 1 then
         place_line_below(2,SCAFFOLD_MATERIAL)
