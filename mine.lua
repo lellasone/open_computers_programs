@@ -593,10 +593,10 @@ function return_home()
         print("state file detected, returning to home")
         file:close()
         lines = io.lines("state.txt")
-        x = lines[0]
-        y = lines[1]
-        z = lines[2]
-        h = lines[3]
+        x = tonumber(lines[0])
+        y = tonumber(lines[1])
+        z = tonumber(lines[2])
+        h = tonumber(lines[3])
 
         print("Going to the correct height")
         while(y<0) do
