@@ -597,10 +597,10 @@ function return_home()
         for line in io.lines("state.txt") do
             lines[#lines+1] = line
         end
-        x = tonumber(lines[0])
-        y = tonumber(lines[1])
-        z = tonumber(lines[2])
-        h = tonumber(lines[3])
+        x = tonumber(lines[1])
+        y = tonumber(lines[2])
+        z = tonumber(lines[3])
+        h = tonumber(lines[4])
 
         print("X,Y,Z,H: ",x, y, z,h)
 
