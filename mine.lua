@@ -116,6 +116,7 @@ function save_position()
     file:write(x,"\n")
     file:write(y,"\n")
     file:write(z,"\n")
+    file:write(h,"\n")
     file:flush()
     file:close()
 end
