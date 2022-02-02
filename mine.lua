@@ -568,7 +568,7 @@ while ii < 40 do
     y = 0
     z = 0
     z = 0
-    h = 0
+    h = s.front
     tracked_right()
     if ii%2 == 1 then
         place_line_below(2,SCAFFOLD_MATERIAL)
