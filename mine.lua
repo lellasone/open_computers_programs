@@ -593,7 +593,10 @@ function return_home()
     if file~=nil then
         print("state file detected, returning to home")
         file:close()
-        lines = io.lines("state.txt")
+        local lines = {}
+        for line in io.lines("state.txt") do
+            lines[#lines+1] = line
+        end
         x = tonumber(lines[0])
         y = tonumber(lines[1])
         z = tonumber(lines[2])
