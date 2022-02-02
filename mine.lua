@@ -351,6 +351,7 @@ function tracked_right()
   elseif h == s.back then
     h = s.left
   else
+    print(h)
     error ("invalid h")
   end
   save_position()
