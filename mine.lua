@@ -590,7 +590,7 @@ end
 --]]
 function return_home()
     local file = io.open("state.txt","r")
-    if f~=nil then
+    if file~=nil then
         print("state file detected, returning to home")
         file:close()
         lines = io.lines("state.txt")
