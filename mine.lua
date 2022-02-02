@@ -602,6 +602,8 @@ function return_home()
         z = tonumber(lines[2])
         h = tonumber(lines[3])
 
+        print("X,Y,Z,H: ",x, y, z,h)
+
         print("Going to the correct height")
         while(y<0) do
             tracked_up()
