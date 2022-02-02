@@ -62,6 +62,7 @@ local c = require("component")
 local r = require("robot")
 local s = require("sides")
 local r = require("robot")
+local red = component.redstone
 local computer = require("computer")
 local g = c.generator
 local ge = c.geolyzer
@@ -637,15 +638,26 @@ function return_home()
                 tracked_back()
             end
         end
+
+        print("going to the correct angle")
+        while(h~=.sfront) do
+            tracked_right()
+        end
             
     else
         print("no state file found")
     end
 end
-    
+
+
+print("setting up redstone")
+red.setWirelessFrequency(1000)
+red.setWakeThreshold(1)
+print("redstone setup complete")
 print_inventory() 
 print(chunk.setActive(true))
 return_home()
+
 local ii = 0
 while ii < 40 do 
     ii = ii + 1
