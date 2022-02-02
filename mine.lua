@@ -640,7 +640,7 @@ function return_home()
         end
 
         print("going to the correct angle")
-        while(h~=.sfront) do
+        while(h~=s.front) do
             tracked_right()
         end
             
