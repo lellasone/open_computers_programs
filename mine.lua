@@ -112,7 +112,7 @@ end
   Write the current robot cordinants (local) to a file. 
 --]]
 function save_position()
-    local file = io.open("state.txt")
+    local file = io.open("state.txt","w")
     file:write(x,"\n")
     file:write(y,"\n")
     file:write(z,"\n")
