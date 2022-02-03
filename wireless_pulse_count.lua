@@ -5,13 +5,14 @@ back
 ]]--
 
 
-local r = require("component")
-local sides = require("sides")
 
+local r = require("component").redstone
+local s = require("sides")
 
+--[[
 local r = component.proxy(component.list("redstone")())
 local s = sides
-
+]]--
 
 local count = 0
 local on = false
