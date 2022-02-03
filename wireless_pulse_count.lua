@@ -5,14 +5,15 @@ back
 ]]--
 
 
-
+--[[
 local r = require("component").redstone
 local s = require("sides")
-
---[[
-local r = component.proxy(component.list("redstone")())
-local s = sides
 ]]--
+
+
+local red = component.proxy(component.list("redstone")())
+local s = sides
+
 
 local count = 0
 local on = false
@@ -20,6 +21,10 @@ local output_side_low = s.left
 local output_side_middle = s.front
 local output_side_high = s.right
 local trigger_update_side = s.back
+local channel = 1010
+local max = 999
+
+red.setWirelessFrequency(channel)
 
 --[[Added to count before output, useful if there is a wake signal on the 
 line that you do not want counted]]--
@@ -36,7 +41,7 @@ end
 while true do
     computer.pullSignal(1)
     --[[Update pulse count ]]-- 
-    local state = r.getWirelessInput()
+    local state = red.getWirelessInpt()
     if last_state == false then
         if state == true then
             count = count + 1
@@ -47,6 +52,10 @@ while true do
     --[[If we get an input pulse, update the output]]--
     if red.getInput(trigger_update_side) > 0 then
         count = count + count_adjust
+
+        if count > max then
+            count = max
+        end
  
 
         local ones = getDigit(count, 1)
