@@ -660,7 +660,7 @@ return_home()
 
 local ii = 0
 while ii < 40 do
-    print("pulsing redstone to indicate life"
+    print("pulsing redstone to indicate life")
     red.setWirelessOutput(true)
     os.sleep(0.5)
     red.setWirelessOutput(false)
