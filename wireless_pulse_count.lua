@@ -4,8 +4,14 @@ two analogue digits to the sides every time it gets a pulse from the
 back
 ]]--
 
+
+local r = require("component")
+local sides = require("sides")
+
+--[[
 local r = component.proxy(component.list("redstone")())
-local s = require("sides")
+local s = sides
+--]]
 
 local count = 0
 local on = false
