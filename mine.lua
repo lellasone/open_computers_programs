@@ -651,7 +651,7 @@ end
 
 
 print("setting up redstone")
-red.setWirelessFrequency(1000)
+red.setWirelessFrequency(1010)
 red.setWakeThreshold(1)
 print("redstone setup complete")
 print_inventory() 
@@ -659,7 +659,12 @@ print(chunk.setActive(true))
 return_home()
 
 local ii = 0
-while ii < 40 do 
+while ii < 40 do
+    print("pulsing redstone to indicate life"
+    red.setWirelessOutput(true)
+    os.sleep(0.5)
+    red.setWirelessOutput(false)
+    print("pulse complete")
     ii = ii + 1
     print(i)
     y = 0
