@@ -11,6 +11,6 @@ startup_action = function()
     print("starting mining program, press control-c now to exit")
     os.sleep(5)
     print("starting mine.lua")
-    dofile("mine.lua")
+    os.execute("mine.lua")
 end
 event.listen("term_available", startup_action)
