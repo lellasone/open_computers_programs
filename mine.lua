@@ -56,6 +56,7 @@
     Changelog:
         1.1 - Place filler on all four sides and down.
         1.2 - clears a 2 high space above, breaks on all sides.
+        2.0 - Added auto-resume and red stone callouts. 
 ]]--
 
 local c = require("component")

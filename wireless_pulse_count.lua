@@ -1,13 +1,20 @@
 --[[
-Counts the number of pulses on a wireless channel and outputs as 
-two analogue digits to the sides every time it gets a pulse from the
-back
-]]--
+Counts the number of pulses on a wireless channel and outputs as three 
+analogue outputs to the sides and back whenever it recieves a redstone
+pulse to the bottom. This was originally used for tracking the number of
+lines mined by mining robots from afar.
 
+A sign provides real time insight into the count. 
 
---[[
-local r = require("component").redstone
-local s = require("sides")
+Prior to use configure the channel and output sides as needed. 
+
+Requires:
+    - Tier 2 microcontroller case.
+    - Tier 1 CPU.
+    - Tier 1 ram. 
+    - Tier 2 redstone card.
+    - Sign Controller.
+    - EEPROM flashed with this program. 
 ]]--
 
 
@@ -16,7 +23,7 @@ local sign = component.proxy(component.list("sign")())
 
 local count = 0
 local last_state = false
-local last_trigger = false
+local last_trigger = 0
 local last_count = 0
 local output_side_low = 5
 local output_side_middle = 2
@@ -54,9 +61,9 @@ while true do
     last_state = state
 
     --[[If we get an input pulse, update the output]]--
-    trigger = tobool(red.getInput(trigger_update_side))
-    if last_trigger == false then
-        if trigger == true then
+    trigger = red.getInput(trigger_update_side)
+    if last_trigger == 0 then
+        if trigger > 0 then
             count = count + count_adjust
 
             if count > max then
