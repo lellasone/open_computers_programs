@@ -5,6 +5,7 @@ back
 ]]--
 
 local r = component.proxy(component.list("redstone")())
+local s = require("sides")
 
 local count = 0
 local on = false
@@ -22,6 +23,8 @@ function getDigit(num, digit)
     local n = 10 ^ digit
     local n1 = 10 ^ (digit -1)
     return math.floor((num % n) / n1)
+
+end
 
 while true do
     computer.pullSignal(1)
