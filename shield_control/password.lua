@@ -10,6 +10,7 @@ local component = require("component")
 local m = component.modem
 local computer = require("computer")
 local event = require("event")
+local term = require("term")
 
 m.open(port)
 
@@ -33,9 +34,9 @@ if port ~= port then
     print("received message from unknown machine")
 elseif message == "good" then 
     print("passcode correct.")
-    print("this computer will shut down in 10s")
-    os.sleep(60)
-    computer.shutdown()
+    print("this screen will clear in 10s")
+    os.sleep(10)
+    term.clear()
 elseif message == "bad" then 
     print("passcode incorrect")
 elseif message == nil then
