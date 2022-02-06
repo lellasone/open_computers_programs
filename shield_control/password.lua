@@ -24,8 +24,8 @@ local password = io.read()
 
 print("Sending passcode...")
 m.broadcast(port, password)
-
-print("Passcode sent, waiting 3s for a reply then shutting down")
+ssssssss
+print("Passcode sent, waiting 3s for a reply")
 
 
 local _, _, from, port, _, message = event.pull(3, "modem_message")
@@ -44,3 +44,5 @@ elseif message == nil then
 else 
     print("unknown error")
 end
+
+print("Ending Program")
