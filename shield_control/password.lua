@@ -11,7 +11,7 @@ local m = component.modem
 local computer = require("computer")
 local event = require("event")
 
-
+m.open(port)
 
 print("Booting up remote computer, please wait 0.5s")
 m.broadcast(port, "wake")
