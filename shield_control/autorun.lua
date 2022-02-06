@@ -7,7 +7,7 @@ Commands:
     "password:off" - Lower shield.
 --]]
 port = 666
-password = gdbg
+password = "gdbg"
 off = password..":off"
 on = password..":on"
 
@@ -25,6 +25,7 @@ startup_action = function()
     term.clear()
 
     -- Set up the auto-wake. 
+    print("setting startup message")
     modem.setWakeMessage("wake")
     modem.isOpen(666)
   
@@ -52,6 +53,7 @@ startup_action = function()
         end
     end
     print("program has ended, shutting down")
+    os.sleep(2)
     computer.shutdown() 
     print(term.read())
 end
