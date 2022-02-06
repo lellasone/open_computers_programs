@@ -24,7 +24,6 @@ local password = io.read()
 
 print("Sending passcode...")
 m.broadcast(port, password)
-ssssssss
 print("Passcode sent, waiting 3s for a reply")
 
 

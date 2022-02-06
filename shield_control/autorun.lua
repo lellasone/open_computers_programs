@@ -39,7 +39,7 @@ startup_action = function()
     term.clear()
 
     -- Set up the auto-wake. 
-    print("setting startup message")
+    print("Setting wake message")
     modem.setWakeMessage("wake")
     modem.open(port)
   
@@ -60,6 +60,7 @@ startup_action = function()
             shield.enable(0)
             modem.broadcast(port,"good")
             os.sleep(60)
+            print("shield flicker over, raising shields")
             shield.enable(1)
         elseif message == ping then
             print("got valid password ping. Taking no actions.")
