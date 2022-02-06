@@ -31,14 +31,14 @@ local _, _, from, port, _, message = event.pull(3, "modem_message")
 
 if port ~= port then
     print("received message from unknown machine")
-elseif response == "good" then 
+elseif message == "good" then 
     print("passcode correct.")
     print("this computer will shut down in 10s")
     os.sleep(60)
     computer.shutdown()
-elseif response == "bad" then 
+elseif message == "bad" then 
     print("passcode incorrect")
-elseif response == nil then
+elseif message == nil then
     print("no reply")
 else 
     print("unknown error")
