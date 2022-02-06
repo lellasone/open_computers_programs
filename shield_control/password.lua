@@ -5,6 +5,7 @@ port = 666
 local component = require("component")
 local m = component.modem
 local computer = require("computer")
+local event = require("event")
 
 print("Booting up remote computer, please wait 4s")
 m.broadcast(port, "wake")
@@ -22,7 +23,7 @@ print("Passcode sent, waiting 3s for a reply then shutting down")
 
 local _, _, from, port, _, message = event.pull(3, "modem_message")
 
-if port != port then
+if port ~= port then
     print("received message from unknown machine")
 elseif response == "good" then 
     print("passcode correct.")
@@ -31,7 +32,7 @@ elseif response == "good" then
     computer.shutdown()
 elseif response == "bad" then 
     print("passcode incorrect")
-elseif response == nul then
+elseif response == nil then
     print("no reply")
 else 
     print("unknown error")
