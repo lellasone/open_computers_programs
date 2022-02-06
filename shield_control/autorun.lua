@@ -53,7 +53,7 @@ startup_action = function()
             modem.broadcast(port,"good")
         elseif message == off then
             print("got shield disable command")
-            shield.disable(0)
+            shield.enable(0)
             modem.broadcast(port,"good") 
         elseif message == password then
             print("got shield flicker command, lowering for 60s")
@@ -61,8 +61,8 @@ startup_action = function()
             modem.broadcast(port,"good")
             os.sleep(60)
             shield.enable(1)
-        elif message = ping then
-            print("got valid password ping. Taking no actions."
+        elseif message == ping then
+            print("got valid password ping. Taking no actions.")
             modem.broadcast(port,"good")
         elseif message ~= nil then
             print("got invalid message")
