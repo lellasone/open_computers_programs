@@ -76,7 +76,7 @@ local nav = c.navigation
 
 
 local FREQ_ON = 10 -- Redstone channel that's always on.
-local FREQ_REPORT 1010 -- redstone channel to pulse to show awake.
+local FREQ_REPORT = 1010 -- redstone channel to pulse to show awake.
 local POWERED_FREQ = 16 -- how often to place redstone blocks.
 local SWATH_WIDTH  = 14 -- width to travel (mined width will be two greater)
 local SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
@@ -617,7 +617,7 @@ function set_relative_h(original_heading)
     local temp = 0
     if original_heading == s.north then 
 	temp = 0
-    elseif original_heading == s.east THEN 
+    elseif original_heading == s.east then
 	temp = 1
     elseif original_heading == s.south then
 	temp = 2
