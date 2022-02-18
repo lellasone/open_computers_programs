@@ -58,7 +58,8 @@
         1.2 - clears a 2 high space above, breaks on all sides.
         1.3 - Added auto-resume and red stone callouts. 
 	2.0 - Switched to non-breaking picks, added nether roof detection, 
-	      switchedt to absolute heading, added go-to-start functionality. 
+	      switchedt to absolute heading, added go-to-start functionality,
+              added an always-on channel for redstone waking
 ]]--
 
 local c = require("component")
@@ -74,7 +75,9 @@ local chunk = c.chunkloader
 local nav = c.navigation
 
 
-local POWERED_FREQ = 16
+local FREQ_ON = 10 -- Redstone channel that's always on.
+local FREQ_REPORT 1010 -- redstone channel to pulse to show awake.
+local POWERED_FREQ = 16 -- how often to place redstone blocks.
 local SWATH_WIDTH  = 14 -- width to travel (mined width will be two greater)
 local SCAFFOLD_MATERIAL = "minecraft:cobblestone" -- what block to use for movement scaffolds.
 local FUEL_MATERIAL = "ic2:itemcellempty"
@@ -481,6 +484,16 @@ end
 
 function mine_column(timeout)
     local y_start = y 
+
+    print("pulsing redstone to indicate life")
+    red.setWirelessFrequency(FREQ_REPORT)
+    red.setWirelessOutput(true)
+    os.sleep(0.5)
+    red.setWirelessOutput(false)
+    red.setWirelessFrequency(FREQ_ON)
+    print("pulse complete")
+ 
+
     for i = 0, timeout, 1 do
         swap_pick()
    	tracked_down()
@@ -598,6 +611,7 @@ end
     This function takes an original facing in absolute world coordinates, and 
     then uses the nav upgrade to determine what the current local h should be
     in relative coordinates. 
+--]]
 function set_relative_h(original_heading)
     h_measured = nav.getFacing()
     local temp = 0
@@ -711,7 +725,7 @@ end
 
 
 print("setting up redstone")
-red.setWirelessFrequency(1010)
+red.setWirelessFrequency(FREQ_ON)
 red.setWakeThreshold(1)
 print("redstone setup complete")
 print_inventory() 
@@ -720,11 +734,6 @@ return_home()
 
 local ii = 0
 while ii < 40 do
-    print("pulsing redstone to indicate life")
-    red.setWirelessOutput(true)
-    os.sleep(0.5)
-    red.setWirelessOutput(false)
-    print("pulse complete")
     ii = ii + 1
     print(i)
     y = 0
