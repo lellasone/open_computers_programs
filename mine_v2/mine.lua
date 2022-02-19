@@ -616,15 +616,47 @@ function set_relative_h(original_heading)
     h_measured = nav.getFacing()
     local temp = 0
     if original_heading == s.north then 
-	temp = 0
+        if h_measured == s.north then
+            h = s.front
+        elseif h_measured == s.south then
+            h = s.back
+        elseif h_measured == s.east then
+            h = s.right
+        else
+            h = s.left
+        end
     elseif original_heading == s.east then
-	temp = 1
+        if h_measured == s.north then
+            h = s.left
+        elseif h_measured == s.south then
+            h = s.right
+        elseif h_measured == s.west then
+            h = s.back
+        else
+            h = s.front
+        end
     elseif original_heading == s.south then
-	temp = 2
+        if h_measured == s.north then
+            h = s.back
+        elseif h_measured == s.south then
+            h = s.front
+        elseif h_measured == s.east then
+            h = s.left
+        else
+            h = s.right
+        end
     elseif original_heading == s.west then
-	temp = 3
-    h = (h_measured -2 + temp) % 4 + 2
+        if h_measured == s.north then
+            h = s.right
+        elseif h_measured == s.south then
+            h = s.left
+        elseif h_measured == s.east then
+            h = s.back
+        else
+            h = s.front
+        end
     end
+    h = (h_measured -2 + temp) % 4 + 2
 end
 
 --[[
@@ -662,17 +694,17 @@ function return_home()
         x = tonumber(lines[1])
         y = tonumber(lines[2])
         z = tonumber(lines[3])
-        h = set_relative_heading(hi)
+        set_relative_heading(hi)
 
         print("X,Y,Z,H:",x, y, z,h)
     else 
 	print("No state file found, going to initial position")
-	h = set_relative_heading(hi)
+	set_relative_heading(hi)
 	x = -xi
 	y = -yi
 	z = -zi
     end
-        print("X,Y,Z,H:",x, y, z,h)
+        pri/nt("X,Y,Z,H:",x, y, z,h)
         print("Going to the correct height")
         while(y<3) do
             tracked_up()
@@ -686,7 +718,7 @@ function return_home()
             while(h~=s.right) do
                 tracked_right()
             end
-            while(x<0) do
+           while(x<0) do
                 break_move()
             end
             while(h~=s.left) do
@@ -717,10 +749,6 @@ function return_home()
         while(h~=s.front) do
             tracked_right()
         end
-            
-    else
-        print("no state file found")
-    end
 end
 
 

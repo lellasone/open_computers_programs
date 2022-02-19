@@ -19,6 +19,6 @@ startup_action = function()
     end
     print("got address: ",mnt_add)
     print("starting mine.lua")
-    os.execute(string.format("cd %s && ./mine.lua")
+    os.execute(string.format("./mnt/%s/mine.lua"))
 end
 event.listen("term_available", startup_action)
