@@ -713,7 +713,7 @@ function return_home()
         print("X,Y,Z,H:",x, y, z,h)
         print("Going to the correct height")
         while(y<3) do
-            tracked_up()
+            break_up()
         end
         while(y>0) do
             tracked_down()
