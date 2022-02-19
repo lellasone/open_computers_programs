@@ -239,8 +239,8 @@ function break_up()
     end
     
     local temp = ge.analyze(s.top)
-    if temp == "minecraft:bedrock" then
-        h = + 3
+    if temp.name == "minecraft:bedrock" then
+        y = y + 3
     end
     return(false) --seems there's no point in hitting it more, lets give up. 
     
@@ -704,7 +704,7 @@ function return_home()
         print("X,Y,Z,H:",x, y, z,h)
     else 
 	print("No state file found, going to initial position")
-        h = 0
+        h = s.front
 	x = -xi
 	y = -yi
 	z = -zi
@@ -716,7 +716,7 @@ function return_home()
             break_up()
         end
         while(y>0) do
-            tracked_down()
+            break_down()
         end
 
         print("going to the correct x")
