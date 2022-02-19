@@ -240,7 +240,7 @@ function break_up()
     
     local temp = ge.analyze(s.top)
     if temp.name == "minecraft:bedrock" then
-        y = y + 3
+        y = y + 1
     end
     return(false) --seems there's no point in hitting it more, lets give up. 
     
