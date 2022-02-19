@@ -612,7 +612,7 @@ end
     then uses the nav upgrade to determine what the current local h should be
     in relative coordinates. 
 --]]
-function set_relative_h(original_heading)
+function set_relative_heading(original_heading)
     h_measured = nav.getFacing()
     local temp = 0
     if original_heading == s.north then 
@@ -656,7 +656,6 @@ function set_relative_h(original_heading)
             h = s.front
         end
     end
-    h = (h_measured -2 + temp) % 4 + 2
 end
 
 --[[
@@ -683,7 +682,7 @@ function return_home()
         zi = tonumber(lines[3])
         hi = tonumber(lines[4])
     end 
-
+    local first = false 
     if file~=nil then
         print("state file detected, returning to home")
         file:close()
@@ -699,12 +698,13 @@ function return_home()
         print("X,Y,Z,H:",x, y, z,h)
     else 
 	print("No state file found, going to initial position")
-	set_relative_heading(hi)
+        h = 0
 	x = -xi
 	y = -yi
 	z = -zi
+        first = true
     end
-        pri/nt("X,Y,Z,H:",x, y, z,h)
+        print("X,Y,Z,H:",x, y, z,h)
         print("Going to the correct height")
         while(y<3) do
             tracked_up()
@@ -746,6 +746,12 @@ function return_home()
         end
 
         print("going to the correct angle")
+        while(h~=s.front) do
+            tracked_right()
+        end
+        
+        if first then
+	set_relative_heading(hi)
         while(h~=s.front) do
             tracked_right()
         end

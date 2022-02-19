@@ -3,6 +3,7 @@
 
 local event = require("event")
 local term = require("term")
+local component = require("component")
 
 drive_label =  nil
 
@@ -19,6 +20,6 @@ startup_action = function()
     end
     print("got address: ",mnt_add)
     print("starting mine.lua")
-    os.execute(string.format("./mnt/%s/mine.lua"))
+    os.execute(string.format("/mnt/%s/mine.lua",mnt_add))
 end
 event.listen("term_available", startup_action)
