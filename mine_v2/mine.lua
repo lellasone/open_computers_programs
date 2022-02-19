@@ -237,7 +237,13 @@ function break_up()
     if(r.swingUp()) then
       break_up() --hitting it worked, so lets keep trying.
     end
+    
+    local temp = ge.analyze(s.top)
+    if temp == "minecraft:bedrock" then
+        h = + 3
+    end
     return(false) --seems there's no point in hitting it more, lets give up. 
+    
   end
 end
 
@@ -751,9 +757,10 @@ function return_home()
         end
         
         if first then
-	set_relative_heading(hi)
-        while(h~=s.front) do
-            tracked_right()
+            set_relative_heading(hi)
+            while(h~=s.front) do
+                tracked_right()
+            end
         end
 end
 
