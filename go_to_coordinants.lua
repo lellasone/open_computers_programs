@@ -28,7 +28,7 @@ function global_cords_to_ship_cords (r0, r1, r2, x, y, z)
 	rl = x
     end
 
-   return fb, ud, lr
+   return fb, ud, rl
 end
 
 function set_jump_distance (desired_jump, max_jump)
@@ -101,11 +101,11 @@ if go == 'y' or go == 'Y' then
 	    jy = yf - y
 	end
 	print(jz)
-	fb, ud, lr = global_cords_to_ship_cords(r0, r1, r2, jx, jy, jz)
-	print("Executing the following jump (fb, ud, lr): ", fb, ud, lr)
+	fb, ud, rl = global_cords_to_ship_cords(r0, r1, r2, jx, jy, jz)
+	print("Executing the following jump (fb, ud, rl): ", fb, ud, rl)
 	
 	-- command the jump
-	w.movement(fb, ud, lr)
+	w.movement(fb, ud, rl)
 	w.rotationSteps(0)
 	w.command("MANUAL", true)
 	os.sleep(10)
