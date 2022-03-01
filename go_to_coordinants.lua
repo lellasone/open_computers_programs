@@ -90,17 +90,16 @@ if go == 'y' or go == 'Y' then
 
 	    dx = xf - x
 	    dz = zf - z
-	    dy = 0
+	    jy = 0
 	jx, x_final = set_jump_distance(dx, max_jump)
 	jz, z_final = set_jump_distance(dz, max_jump)
-	if z_final or x_final then last = True end
+	if z_final and x_final then last = true end
 	
-	dy = yc - y
+	jy = yc - y
         if last then 
-	    dy = yf - y
+	    jy = yf - y
 	end
-	print(dy)
-	fb, ud, lr = global_cords_to_ship_cords(r0, r1, r2, dx, dy, dz)
+	fb, ud, lr = global_cords_to_ship_cords(r0, r1, r2, jx, jy, jz)
 	print("Executing the following jump (fb, ud, lr): ", fb, ud, lr)
 	
 	-- command the jump
