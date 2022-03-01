@@ -42,7 +42,7 @@ function set_jump_distance (desired_jump, max_jump)
         j = desired_jump
         final = true
     end
-    return(j, final)
+    return j, final
 end
 
 
@@ -52,7 +52,7 @@ x, y, z = w.getLocalPosition()
 -- Get ship jump range.
 w.movement(0,0,0)
 w.command("MANUAL",false)
-max_jump = w.getMaxJumpDistance()
+success, max_jump = w.getMaxJumpDistance()
 
 print("The ship is at: ", x, y, z)
 print("The ship has jump range: ", max_jump)
@@ -70,7 +70,7 @@ print("Enter your desired cruising height")
 yc = io.read()
 
 -- Calculate approximate jumps required
-jumps = math.sqrt((xf - x)*(xf-x) + (xf - x)*(xf - x))/max_jump
+jumps = math.sqrt((xf - x)*(xf-x) + (zf - z)*(zf - z))/max_jump
 
 print("Heading to: ", xf, yf, zf)
 print("Rough jump count estimate: ",  jumps)
@@ -93,19 +93,20 @@ if go == 'y' or go == 'Y' then
 	    dy = 0
 	jx, x_final = set_jump_distance(dx, max_jump)
 	jz, z_final = set_jump_distance(dz, max_jump)
-	if z_final or x_final then final = True end
+	if z_final or x_final then last = True end
 	
-	if dx > max
+
         if first then
 	    dy = yc - y
-
+	end
         if last then 
 	    dy = yf - y
+	end
 	fb, lr, ud = global_cords_to_ship_cords(r0, r1, r2, dx, dy, dz)
 	print("Executing the following jump (fb, ud, lr): ", fb, ud, lr)
 	
 	-- command the jump
-	w.movement(rb, ud, lr)
+	w.movement(fb, ud, lr)
 	w.rotationSteps(0)
 	w.command("MANUAL", true)
 	os.sleep(10)
@@ -113,4 +114,4 @@ if go == 'y' or go == 'Y' then
     print("Jump sequence complete")
 else
     print("Ending program")
-
+end
