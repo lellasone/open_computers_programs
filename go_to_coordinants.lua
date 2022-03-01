@@ -31,10 +31,31 @@ function global_cords_to_ship_cords (r0, r1, r2, x, y, z)
    return fb, rl, ud
 end
 
+function set_jump_distance (desired_jump, max_jump)
+    local j = 0
+    local final = false
+    if desired_jump > max_jump then
+	j = max_jump
+    elseif desired_jump < -max_jump then
+	j = -max_jump
+    else 
+        j = desired_jump
+        final = true
+    end
+    return(j, final)
+end
+
+
 -- Get desired target. 
 x, y, z = w.getLocalPosition()
 
+-- Get ship jump range.
+w.movement(0,0,0)
+w.command("MANUAL",false)
+max_jump = w.getMaxJumpDistance()
+
 print("The ship is at: ", x, y, z)
+print("The ship has jump range: ", max_jump)
 
 print("Enter your desired X coordinant")
 xf = io.read()
@@ -48,17 +69,48 @@ zf = io.read()
 print("Enter your desired cruising height")
 yc = io.read()
 
+-- Calculate approximate jumps required
+jumps = math.sqrt((xf - x)*(xf-x) + (xf - x)*(xf - x))/max_jump
+
 print("Heading to: ", xf, yf, zf)
+print("Rough jump count estimate: ",  jumps)
 print("Enter 'Y' to execute, or any other charicter to cancel")
 go = io.read()
 
 -- Start jump sequence. 
 
-r0,  r1, r2 = w.getOrientation()
 
+local last= False
+local first = True
 if go == 'y' or go == 'Y' then
-    print("Starting jump sequence to: ",  xf, yf, zf)
-end
+    while not last do 
+        print("Starting jump sequence to: ",  xf, yf, zf)
+	    r0,  r1, r2 = w.getOrientation()
+            x, y, z = w.getLocalPosition()
 
+	    dx = xf - x
+	    dz = zf - z
+	    dy = 0
+	jx, x_final = set_jump_distance(dx, max_jump)
+	jz, z_final = set_jump_distance(dz, max_jump)
+	if z_final or x_final then final = True end
+	
+	if dx > max
+        if first then
+	    dy = yc - y
 
-print("Jump sequence complete")
+        if last then 
+	    dy = yf - y
+	fb, lr, ud = global_cords_to_ship_cords(r0, r1, r2, dx, dy, dz)
+	print("Executing the following jump (fb, ud, lr): ", fb, ud, lr)
+	
+	-- command the jump
+	w.movement(rb, ud, lr)
+	w.rotationSteps(0)
+	w.command("MANUAL", true)
+	os.sleep(10)
+    end
+    print("Jump sequence complete")
+else
+    print("Ending program")
+
