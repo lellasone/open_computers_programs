@@ -36,8 +36,8 @@ function set_jump_distance (desired_jump, max_jump)
     local final = false
     if desired_jump > max_jump then
 	j = max_jump
-    elseif desired_jump < -max_jump then
-	j = -max_jump
+    elseif desired_jump < -1 * max_jump then
+	j = -1 * max_jump
     else 
         j = desired_jump
         final = true
@@ -91,6 +91,7 @@ if go == 'y' or go == 'Y' then
 	    dx = xf - x
 	    dz = zf - z
 	    jy = 0
+	print(dz)
 	jx, x_final = set_jump_distance(dx, max_jump)
 	jz, z_final = set_jump_distance(dz, max_jump)
 	if z_final and x_final then last = true end
@@ -99,6 +100,7 @@ if go == 'y' or go == 'Y' then
         if last then 
 	    jy = yf - y
 	end
+	print(jz)
 	fb, ud, lr = global_cords_to_ship_cords(r0, r1, r2, jx, jy, jz)
 	print("Executing the following jump (fb, ud, lr): ", fb, ud, lr)
 	
