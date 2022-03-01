@@ -248,6 +248,29 @@ function break_up()
 end
 
 --[[
+  This function will attempt to break the block below it and then move into 
+  that space. This function will continue to attempt to break blocks and move for 
+  as long as its block breaks are succesful. If it is unable to break the block it
+  will give up. This is a tracked movement. 
+  returns: true if move succesful, false if can't break. 
+--]]
+function break_down()
+  if tracked_down() == true then
+    return(true)
+  else
+    if(r.swingDown()) then
+      break_down() --hitting it worked, so lets keep trying.
+    end
+    
+    --local temp = ge.analyze(s.top)
+    --if temp.name == "minecraft:bedrock" then
+    --    y = y + 1
+    --end
+    return(false) --seems there's no point in hitting it more, lets give up. 
+  end
+end
+
+--[[
   This function will place a line of blocks below the robot. It will automatically
   switch from one stack to another as needed, but does not check that enough blocks
   are in inventory before starting. Stacks will be used from low to high according
