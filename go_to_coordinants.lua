@@ -27,7 +27,8 @@ function global_cords_to_ship_cords (r0, r1, r2, x, y, z)
 	fb = -z
 	rl = x
     end
-
+   print("rl",rl)
+   print("fb",fb)
    return fb, ud, rl
 end
 

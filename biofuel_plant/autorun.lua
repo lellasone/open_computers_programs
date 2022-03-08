@@ -66,24 +66,33 @@ direct_control = function(input, output, override, invert_input, invert_output)
     ]]--
 
     -- get input signal
-    local in = false
+    local into = false
     local out = false
     local shutdown = red.getWirelessInput()
     local over = red.getBundledInput(side_red, override)
     if red.getBundledInput(side_red, input) > 0 then
-        in = not invert_input
+        into = not invert_input
     else
-        in = invert_input
+        into = invert_input
     end
 
     if shutdown and not over then
         out = invert_output
-    elseif in then 
+    elseif into then 
         out = not invert_output
     else
         out = invert_output
     end
     red.setBundledOutput(side_red, output, out)
+end
+
+print_state = function()
+     
+
+
+
+
+
 end
  
 local startup_action
@@ -95,16 +104,15 @@ startup_action = function()
     print("Setting Redstone Auto-Wake")
     red.setWakeThreshold(1)
 
-    print("Setting Remove Shutdown Frequency")
-  
+    print(format("Setting Remote Shutdown Frequency")
+    
+     
     while true
     do
         -- Wait for a while.
-        os.sleep(120) 
-       
+        os.sleep(60)
 
         -- process fuel control.
-        direct_control(
 
         -- process bone control.
 
