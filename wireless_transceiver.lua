@@ -38,10 +38,10 @@ local side = 2
 local state = 0
 
 function read_sign()
-    local sign_val = sign.getValue()
+    local sign_val = sign.getValue(5)
     local count = 0
     for line in sign_val:gmatch("([^\n]*)\n?") do
-	sign.setValue(count)
+	sign.setValue(tostring(count))
         if count == 1 then
 	    channel = tonumber(line)
         elseif count == 0 then
