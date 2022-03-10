@@ -41,7 +41,6 @@ function read_sign()
     sign_val = sign.getValue(5)
     count = 0
     for line in sign_val:gmatch("([^\n]*)\n?") do
-	sign.setValue(tostring(count))
         if count == 1 then
 	    channel = tonumber(line)
         elseif count == 0 then
