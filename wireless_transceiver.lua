@@ -55,7 +55,7 @@ end
 
 
 function write_sign()
-	sign.setValue(string.format("%s\n%4.0f\n%4.0f\n%4.0f",type, channel, side, state))
+	sign.setValue(5, string.format("%s\n%4.0f\n%4.0f\n%4.0f",type, channel, side, state))
 end
 
 while true do 
