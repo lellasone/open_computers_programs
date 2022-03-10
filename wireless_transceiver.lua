@@ -32,14 +32,14 @@ local red = component.proxy(component.list("redstone")())
 local sign = component.proxy(component.list("sign")())
 red.setWakeThreshold(1)
 
-local channel = 0
-local type = "in"
-local side = 2
-local state = 0
+channel = 0
+type = "in"
+side = 2
+state = 0
 
 function read_sign()
-    local sign_val = sign.getValue(5)
-    local count = 0
+    sign_val = sign.getValue(5)
+    count = 0
     for line in sign_val:gmatch("([^\n]*)\n?") do
 	sign.setValue(tostring(count))
         if count == 1 then
@@ -56,7 +56,6 @@ end
 
 
 function write_sign()
-	type = "in"
 	sign.setValue(string.format("%s\n%4.0f\n%4.0f\n%4.0f",type, channel, side, state))
 end
 
