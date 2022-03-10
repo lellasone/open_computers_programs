@@ -48,8 +48,8 @@ function read_sign()
 	    type = line
         elseif count == 2 then
     	    side = tonumber(line)
-        count = count + 1
 	end
+        count = count + 1
     end
 end
 
@@ -64,10 +64,14 @@ while true do
     red.setWirelessFrequency(channel)
     if type == "in" then
 	state = red.getWirelessInput()
+	output = 0
+	if state then output = 15 end
 	red.setOutput(side, state)
     elseif type == "out" then
 	state = red.getInput(side)
-	red.setWirelessOutput(state)
+	output = false
+	if state > 0 then output = true end
+	red.setWirelessOutput(output)
     end
     write_sign()
 end
