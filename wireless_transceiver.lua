@@ -64,7 +64,7 @@ while true do
     if type == "in" then
 	state = red.getWirelessInput()
 	output = 0
-	if state then output = 15 end
+	if state then state = 15 end
 	red.setOutput(side, state)
     elseif type == "out" then
 	state = red.getInput(side)
