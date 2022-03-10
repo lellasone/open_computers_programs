@@ -32,10 +32,11 @@ local red = component.proxy(component.list("redstone")())
 local sign = component.proxy(component.list("sign")())
 red.setWakeThreshold(1)
 
+sign.setValue("Test Point One")
 local channel = 0
 local type = "in"
 local side = 2
-state = 0
+local state = 0
 
 function read_sign()
     local sign_val = sign.getValue()
@@ -48,6 +49,7 @@ function read_sign()
         elseif count == 2 then
     	    side = tonumber(line)
         count = count + 1
+	end
     end
 end
 
@@ -57,6 +59,7 @@ function write_sign()
 	sign.setValue(string.format(" %s \n %4.0f\n %4.0f \n%4.0f",type, channel, side, state))
 end
 
+sign.setValue("Test Point 2")
 while true do 
     read_sign()
     red.setWirelessFrequency(channel)
