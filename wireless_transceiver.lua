@@ -38,7 +38,7 @@ side = 2
 state = 0
 
 function read_sign()
-    sign_val = sign.getValue(5)
+    sign_val = sign.getValue(3)
     count = 0
     for line in sign_val:gmatch("([^\n]*)\n?") do
         if count == 1 then
@@ -55,7 +55,7 @@ end
 
 
 function write_sign()
-	sign.setValue(5, string.format("%s\n%4.0f\n%4.0f\n%4.0f",type, channel, side, state))
+	sign.setValue(string.format("%s\n%4.0f\n%4.0f\n%4.0f",type, channel, side, state))
 end
 
 while true do 
@@ -63,8 +63,7 @@ while true do
     red.setWirelessFrequency(channel)
     if type == "in" then
 	state = red.getWirelessInput()
-	output = 0
-	if state then state = 15 end
+	if state then state = 15 else state = 0 end
 	red.setOutput(side, state)
     elseif type == "out" then
 	state = red.getInput(side)
