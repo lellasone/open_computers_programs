@@ -110,8 +110,8 @@ function new_patch()
 end
 
 while true do
-    print(state)
     -- Get node readouts and pulse.
+    print("state" state)
     red.setWirelessFrequency(channel_report)
     local flow1 = red.getBundledInput(side_cable, color_itemflow)
     red.setWirelessOutput(1) 
@@ -144,7 +144,8 @@ while true do
     else
         print("Invalid State Reached")
     end
-
+    print("Item Flow: ", itemflow, "Local Power Low: ", localpower_Low, "Players On", players_on)
+    
     os.sleep(step_delay)
 
 end
