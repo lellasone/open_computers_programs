@@ -13,7 +13,7 @@ red = require("component").redstone
 sides = require("sides")
 colors = require("colors")
 -- configuration settings
-local min_cut_time = 800 -- How long must the ship cut before being allowed 
+local min_cut_time = 6000 -- How long must the ship cut before being allowed 
                          -- to advance if nothing is mined. This should be
                          -- equal to the time required to scan the area for the
                          -- pure void case.
@@ -110,7 +110,7 @@ function new_patch()
 end
 
 while true do
-
+    print(state)
     -- Get node readouts and pulse.
     red.setWirelessFrequency(channel_report)
     local flow1 = red.getBundledInput(side_cable, color_itemflow)
