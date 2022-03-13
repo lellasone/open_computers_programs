@@ -8,7 +8,7 @@ machine.
 Each state is implemented as a function, and the order of the if statements
 at the bottom of each state determines the transition priority order. 
 ]]--
-warp = require("component").warpdriveShipCore
+w = require("component").warpdriveShipCore
 red = require("component").redstone
 sides = require("sides")
 colors = require("colors")
@@ -111,12 +111,12 @@ end
 
 while true do
     -- Get node readouts and pulse.
-    print("state" state)
+    print("state", state)
     red.setWirelessFrequency(channel_report)
     local flow1 = red.getBundledInput(side_cable, color_itemflow)
-    red.setWirelessOutput(1) 
+    red.setWirelessOutput(true) 
     os.sleep(0.5)
-    red.setWirelessOutput(0)
+    red.setWirelessOutput(false)
     local flow2 = red.getBundledInput(side_cable, color_itemflow)
     if flow1 + flow2 > 0 then item_flow = true 
     else item_flow = false end
@@ -128,7 +128,7 @@ while true do
     end 
     
     red.setWirelessFrequency(channel_players)
-    if red.getWirelessInput() > 0 then players_on = true
+    if red.getWirelessInput() then players_on = true
     else players_on = false end     
      
     if state == s_start then
@@ -144,7 +144,8 @@ while true do
     else
         print("Invalid State Reached")
     end
-    print("Item Flow: ", itemflow, "Local Power Low: ", localpower_Low, "Players On", players_on)
+    print("Item Flow: ", item_flow, "Local Power Low: ", localpower_Low, "Players On", players_on)
+    print("Cut Time: ", cut_time)
     
     os.sleep(step_delay)
 
