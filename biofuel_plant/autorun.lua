@@ -68,16 +68,18 @@ direct_control = function(input, output, override, invert_input, invert_output)
     ]]--
 
     -- get input signal
+    print("A")
     local into = false
     local out = false
     local shutdown = red.getWirelessInput()
     local over = red.getBundledInput(side_red, override)
+    print("B")
     if red.getBundledInput(side_red, input) > 0 then
         into = not invert_input
     else
         into = invert_input
     end
-
+    print("C")
     if shutdown and not over then
         out = invert_output
     elseif into then 
@@ -85,7 +87,9 @@ direct_control = function(input, output, override, invert_input, invert_output)
     else
         out = invert_output
     end
+    print("D")
     red.setBundledOutput(side_red, output, out)
+    print("E")
 end
 
 print_state = function()
@@ -136,12 +140,11 @@ startup_action = function()
         print("Inputs: ", "RED", s_red, "BLUE", s_blue, "GREEN", s_green, "BONE", s_bone, "OVERIDE", s_override)
             
         -- Outputs 
-        s_red = red.getBundledInput(side_red, red_out)
-        s_blue = red.getBundledInput(side_red, blue_out)
-        s_green = red.getBundledInput(side_red, green_out)
-        s_bone = red.getBundledInput(side_red, bone_out)
-        s_overide = red.getBundledInput(side_red, override)
-        print("Outputs: ", "RED", s_red, "BLUE", s_blue, "GREEN", s_green, "BONE", s_bone, "OVERIDE", s_override)
+        s_red = red.getBundledOutput(side_red, red_out)
+        s_blue = red.getBundledOutput(side_red, blue_out)
+        s_green = red.getBundledOutput(side_red, green_out)
+        s_bone = red.getBundledOutput(side_red, bone_out)
+        print("Outputs: ", "RED", s_red, "BLUE", s_blue, "GREEN", s_green, "BONE", s_bone)
 
     end
     print("program has ended, shutting down")
