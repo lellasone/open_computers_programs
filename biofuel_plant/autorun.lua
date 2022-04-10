@@ -56,6 +56,8 @@ local dye_buff_low_full = colors.orange
 local dye_buff_high_full = colors.cyan
 local fuel_out = colors.purple
 
+local players_on_frequency = 10
+
 
 direct_control = function(input, output, override, invert_input, invert_output)
     --[[ This allows one redstone signal to set another redstone signal
@@ -103,9 +105,9 @@ startup_action = function()
     -- Set up the auto-wake. 
     print("Setting Redstone Auto-Wake")
     red.setWakeThreshold(1)
-
-    print(format("Setting Remote Shutdown Frequency")
-    
+ 
+    print(format("Setting Remote Shutdown Frequency"))
+    red.setWirelessFrequency(players_on_frequency)
      
     while true
     do
@@ -125,7 +127,21 @@ startup_action = function()
          
         direct_control(blue_in, blue_out, override, true, false)
         -- Print out system state.
-    
+        -- Inputs
+        s_red = red.getBundledInput(side_red, red_in)
+        s_blue = red.getBundledInput(side_red, blue_in)
+        s_green = red.getBundledInput(side_red, green_in)
+        s_bone = red.getBundledInput(side_red, bone_in)
+        s_overide = red.getBundledInput(side_red, override)
+        print("Inputs: ", "RED", s_red, "BLUE", s_blue, "GREEN", s_green, "BONE", s_bone, "OVERIDE", s_override)
+            
+        -- Outputs 
+        s_red = red.getBundledInput(side_red, red_out)
+        s_blue = red.getBundledInput(side_red, blue_out)
+        s_green = red.getBundledInput(side_red, green_out)
+        s_bone = red.getBundledInput(side_red, bone_out)
+        s_overide = red.getBundledInput(side_red, override)
+        print("Outputs: ", "RED", s_red, "BLUE", s_blue, "GREEN", s_green, "BONE", s_bone, "OVERIDE", s_override)
 
     end
     print("program has ended, shutting down")
