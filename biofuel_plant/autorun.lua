@@ -87,6 +87,11 @@ direct_control = function(input, output, override, invert_input, invert_output)
     else
         out = invert_output
     end
+    if out then 
+        out = 15
+    else
+        out = 0
+    end
     print("D")
     red.setBundledOutput(side_red, output, out)
     print("E")
