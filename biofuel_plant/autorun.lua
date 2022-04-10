@@ -110,7 +110,8 @@ startup_action = function()
     print("Setting Redstone Auto-Wake")
     red.setWakeThreshold(1)
  
-    print(format("Setting Remote Shutdown Frequency"))
+    print("Setting Remote Shutdown Frequency")
+    print(players_on_frequency)
     red.setWirelessFrequency(players_on_frequency)
      
     while true
