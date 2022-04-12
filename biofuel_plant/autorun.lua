@@ -57,7 +57,7 @@ local dye_buff_low_full = colors.orange
 local dye_buff_high_full = colors.cyan
 local fuel_out = colors.purple
 
-local players_on_frequency = 10
+local players_on_frequency = 99
 
 
 direct_control = function(input, output, override, invert_input, invert_output)
@@ -69,18 +69,15 @@ direct_control = function(input, output, override, invert_input, invert_output)
     ]]--
 
     -- get input signal
-    print("A")
     local into = false
     local out = false
     local shutdown = red.getWirelessInput()
     local over = red.getBundledInput(side_red, override)
-    print("B")
     if red.getBundledInput(side_red, input) > 0 then
         into = not invert_input
     else
         into = invert_input
     end
-    print("C")
     if shutdown and not over then
         out = invert_output
     elseif into then 
@@ -93,9 +90,7 @@ direct_control = function(input, output, override, invert_input, invert_output)
     else
         out = 0
     end
-    print("D")
     red.setBundledOutput(side_red, output, out)
-    print("E")
 end
 
 print_state = function()
