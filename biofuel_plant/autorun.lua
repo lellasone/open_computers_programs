@@ -45,13 +45,14 @@ local red_in = colors.pink
 local red_out = colors.red
 local blue_in = colors.lightblue
 local blue_out = colors.blue
-local green_in = colors.lightgreen
+local green_in = colors.lime
 local green_out = colors.green
 local bone_in = colors.yellow
 local bone_out = colors.white
 local override = colors.black
 
-local woodfarm = colors.grey
+local woodfarm_in = colors.grey
+local woodfarm_out = colors.brown
 local dye_buff_low_full = colors.orange
 local dye_buff_high_full = colors.cyan
 local fuel_out = colors.purple
@@ -88,7 +89,7 @@ direct_control = function(input, output, override, invert_input, invert_output)
         out = invert_output
     end
     if out then 
-        out = 15
+        out = 250
     else
         out = 0
     end
@@ -122,20 +123,24 @@ startup_action = function()
     while true
     do
         -- Wait for a while.
-        os.sleep(60)
+        os.sleep(20)
 
         -- process fuel control.
 
         -- process bone control.
-
+        direct_control(bone_in, bone_out, override, true, true)
         -- process red flower control.
-        direct_control(red_in, red_out, override, true, false)
+        direct_control(red_in, red_out, override, true, true)
         -- process green flower control.
 
-        direct_control(green_in, green_out, override, true, false)
+        direct_control(green_in, green_out, override, true, true)
         -- process blue flower control.
          
-        direct_control(blue_in, blue_out, override, true, false)
+        direct_control(blue_in, blue_out, override, true, true)
+        
+        -- Process Wood Production
+        direct_control(woodfarm_in, woodfarm_out, override, true, true)
+        
         -- Print out system state.
         -- Inputs
         s_red = red.getBundledInput(side_red, red_in)
@@ -143,7 +148,7 @@ startup_action = function()
         s_green = red.getBundledInput(side_red, green_in)
         s_bone = red.getBundledInput(side_red, bone_in)
         s_overide = red.getBundledInput(side_red, override)
-        print("Inputs: ", "RED", s_red, "BLUE", s_blue, "GREEN", s_green, "BONE", s_bone, "OVERIDE", s_override)
+        print("Inputs: ", "RED", s_red, "BLUE", s_blue, "GREEN", s_green, "BONE", s_bone, "OVERIDE", s_overide)
             
         -- Outputs 
         s_red = red.getBundledOutput(side_red, red_out)
