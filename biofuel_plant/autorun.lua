@@ -51,7 +51,7 @@ local bone_in = colors.yellow
 local bone_out = colors.white
 local override = colors.black
 
-local woodfarm_in = colors.grey
+local woodfarm_in = colors.gray
 local woodfarm_out = colors.brown
 local dye_buff_low_full = colors.orange
 local dye_buff_high_full = colors.cyan
@@ -78,7 +78,7 @@ direct_control = function(input, output, override, invert_input, invert_output)
     else
         into = invert_input
     end
-    if shutdown and not over then
+    if shutdown and not over > 0 then
         out = invert_output
     elseif into then 
         out = not invert_output
